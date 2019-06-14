@@ -1,4 +1,4 @@
-## ITALO DATA SCIENTIST
+## ITALO VIADÃO
 
 You can use the [editor on GitHub](https://github.com/edgarcutar/curso_suzano/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
