@@ -1,12 +1,16 @@
 name: "Curso-r-suzano"
 output_dir: "."
 navbar:
-  title: "Curso R Suzano - Módulo 1"
+  title: "Curso R Suzano"
   left:
     - text: "Dia 01 - Manhã"
       href: dia01A.html
     - text: "Dia 01 - Tarde"
       href: dia01B.html
+    - text: "Dia 02 - Manhã"
+      href: dia02A.html
+    - text: "Dia 02 - Tarde"
+      href: dia02B.html
   right:
     - text: "Edgar"
     - icon: fa-envelope fa-lg
