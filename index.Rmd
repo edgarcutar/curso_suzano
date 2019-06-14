@@ -1,7 +1,10 @@
+---
 
-<link rel="stylesheet" href="styles.css" type="text/css">
+title: ""
 
-<img src="images/emily_2.jpg" style="width:25%; border:10px solid; margin-right: 20px" align="left">
+---
+
+<br>
 
 Seu Armando
 Eu to desde as 5 e 45 da manhã
@@ -19,3 +22,5 @@ vai tudo pra casa do caralho, filha da puta
 E te falo mais, seu armando, pode contratar outro funcionário, que nem no sol e na chuva eu vou encher farinha pro senhor, portugues filho da puta
 vai tomar no cu!
 Eu não sou escravo não, desgraçado!
+
+<br>
