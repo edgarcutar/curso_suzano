@@ -1,0 +1,24 @@
+left:
+  - text: "Dia 1 - Manhã"
+href: Dia1A.html
+- text: "Dia 1 - Tarde"
+href: Dia1B.html
+- text: "Dia2 - Manhã"
+href: Dia2A.html
+- text: "Dia 2 - Tarde"
+href: Dia2B.html
+right:
+  - text: "Edgar"
+- icon: fa-envelope fa-lg
+href: mailto:edgarj@suzano.com.br
+- icon: fa-github fa-lg
+href: http://github.com/zabore
+- icon: fa-linkedin fa-lg
+href: https://www.linkedin.com/in/edgarcutar
+- text: "Ítalo"
+- icon: fa-envelope fa-lg
+href: mailto:icegatta@suzano.com.br
+- icon: fa-github fa-lg
+href: http://github.com/italocegatta
+- icon: fa-linkedin fa-lg
+href: https://www.linkedin.com/in/italocegatta
