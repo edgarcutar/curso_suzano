@@ -3,6 +3,7 @@ output_dir: "."
 navbar:
   title: "Curso R Suzano"
   left:
+    - icon: fa-tree fa-lg
     - text: "Comece aqui"
       href: material.html
     - text: "Dia 01"
