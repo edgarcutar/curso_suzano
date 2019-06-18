@@ -7,8 +7,6 @@ navbar:
       href: material.html
     - text: "Dia 01"
       menu:
-      - text: "Preliminares"
-        href: Preliminares.html
       - text: "Importação de Dados"
         href: 01_Importacao.html
       - text: "Visualização"
