@@ -5,14 +5,18 @@ navbar:
   left:
     - text: "Material do Curso"
       href: material.html
-    - text: "Dia 01 - Manhã"
-      href: dia01A.html
-    - text: "Dia 01 - Tarde"
-      href: dia01B.html
-    - text: "Dia 02 - Manhã"
-      href: dia02A.html
-    - text: "Dia 02 - Tarde"
-      href: dia02B.html
+    - text: "Dia 01"
+      menu:
+      - text: "Preliminares"
+        href: Preliminares.html
+      - text: "Visualização"
+        href: dia01B.html
+    - text: "Dia 02"
+      menu:
+      - text: "Manipulação"
+        href: dia02A.html
+      - text: "Projeto"
+        href: dia02B.html
   right:
     - text: "Edgar"
     - icon: fa-envelope fa-lg
