@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "Curso R Suzano"
   left:
-  - text: "Material do Curso"
+    - text: "Material do Curso"
       href: material.html
     - text: "Dia 01 - Manhã"
       href: dia01A.html
