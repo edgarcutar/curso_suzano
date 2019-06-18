@@ -6,12 +6,12 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(results = "hide", fig.show = "hide", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set( message = FALSE, warning = FALSE)
 ```
 
 O `ggplot2`é o pacote mais utilizado para criação de gráficos no R. Ele implementa a Gramática dos Gráficos proposta por Leland Wilkinson em seu livro [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448). A ideia é que há uma gramática racional e computacional para a composição de gráficos estatísticos. Ao controlar a gramática, você pode gerar um grande conjunto de gráficos cuidadosamente construídos a partir de um conjunto relativamente pequeno de operações.
 
-Existem muitos materiais e cursos sobre como criar gráficos com o ggplot2. Basta um simples google sobre o assunto ou problema que você tem e rapidamente vai aparecer uma pergunta semelhante e várias rzonaclimaticaostas assunto. Como padrão, a documentação do pacote pode ser consultada, bem como diversos livros sobre o assunto. Recomendamos o site do pacotes [ggplot2](https://ggplot2.tidyverse.org/) e o [livro do autor](https://www.amazon.com.br/dp/B01GVCRF6M/)
+Existem muitos materiais e cursos sobre como criar gráficos com o ggplot2. Basta um simples google sobre o assunto ou problema que você tem e rapidamente vai aparecer uma pergunta semelhante e várias respostas assunto. Como padrão, a documentação do pacote pode ser consultada, bem como diversos livros sobre o assunto. Recomendamos o site do pacotes [ggplot2](https://ggplot2.tidyverse.org/) e o [livro do autor](https://www.amazon.com.br/dp/B01GVCRF6M/)
 
 
 ## Conceitos básicos
