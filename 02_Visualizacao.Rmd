@@ -6,7 +6,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set( message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(results = "hide", fig.show = "hide", message = FALSE, warning = FALSE)
 ```
 
 O `ggplot2`é o pacote mais utilizado para criação de gráficos no R. Ele implementa a Gramática dos Gráficos proposta por Leland Wilkinson em seu livro [The Grammar of Graphics](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448). A ideia é que há uma gramática racional e computacional para a composição de gráficos estatísticos. Ao controlar a gramática, você pode gerar um grande conjunto de gráficos cuidadosamente construídos a partir de um conjunto relativamente pequeno de operações.
@@ -16,9 +16,9 @@ Existem muitos materiais e cursos sobre como criar gráficos com o ggplot2. Bast
 
 ## Conceitos básicos
 
-Existem alguns conceitos básicos em torno desde universo de gráficos. Em primeiro lugar, os gráficos são construídos em camadas (layers). Cada componente do gráfico, a partir dos dados fornecidos, está amarrado ao sistema de coordenadas e este por sua vez, está condicionado aos resumos estatísticos, rótulos e escalas. Portanto, gráficos expressos são construídos com poucos comandos, mas com definições padrões. Para criar gráficos personalizados e de maior qualidade é preciso adicionar algumas funções... mas fique tranquilo, dificilmente vai passar de 7 camadas.
+Existem alguns conceitos básicos em torno desde universo de gráficos. Em primeiro lugar, os gráficos são construídos em camadas (layers). Cada componente do gráfico, a partir dos dados fornecidos, está amarrado ao sistema de coordenadas e este por sua vez, está condicionado aos resumos estatísticos, rótulos e escalas. Portanto, gráficos expressos são construídos com poucos comandos, mas com definições padrões. Para criar gráficos personalizados e de maior qualidade é preciso adicionar algumas funções.
 
-As propriedades gráficas que codificam os dados são dimensões tratadas como *aesthetic* no ggplot2, destacando:
+As propriedades gráficas que codificam os dados são dimensões tratadas como **aesthetics** no ggplot2, sendo colocadas dentro da função `aes()` que, por si, só existe dentro das funções do `ggplot`. Dentre as dimensões, destacam-se:
 
 *  x 
 *  y 
@@ -27,7 +27,7 @@ As propriedades gráficas que codificam os dados são dimensões tratadas como *
 *  color
 *  fill
 
-Os elementos gráficos são as geometrias, como:
+Os elementos gráficos são as **geom**etrias, como:
 
 *  point
 *  line
@@ -38,23 +38,29 @@ Os elementos gráficos são as geometrias, como:
 *  hitogram
 *  density
 
+###### Geometrias são definidas pelas funções `geom_[TIPO]`
+
 Você também vai querer adicionar estatísticas que resumem seus dados, e o pacote possibilita algumas delas:
 
 *  smooth
 *  mean/median
 *  function
 
-As dimensões (aesthetic), geometrias e resumos estatísticos constituem as mais importantes camadas de gráfico, mas há uma série de outras características que você vai querer ajustar. As mais comuns são:
+###### Estatísticas são definidas pelas funções `stat_[TIPO]`
 
-*  Eixo x ou y em escala logarítmica
+As dimensões (aesthetics), geometrias e resumos estatísticos constituem as mais importantes camadas de gráfico, mas há uma série de outras características que você vai querer ajustar. As mais comuns são:
+
+*  Eixo x ou y em escalas específicas
 *  Paletas de cores personalizadas
-*  Formas de pontos personalizado, ou tipos de linha
+*  Formas de pontos personalizados, ou tipos de linhas.
 
 As seções seguintes são dedicadas a alguns destes elementos básicos ggplot2.
 
 ## Layers
 
 Iremos criar gráficos em camadas. A estratificação de elementos é talvez o aspecto mais poderoso do ggplot2. Isso significa que gráficos relativamente complexos são construídos com pequenas peças, que você pode adicionar ou remover de forma interativa.
+
+###### para adicionar camadas no ggplot, vamos usar, por incrível que pareça, o símbolo `+`
 
 ## Os dados
 
@@ -66,15 +72,15 @@ library(readxl)
 
 inv <- read_excel("data/IFC_BA_2018.xlsx")
 
-p <- ggplot(inv, aes(x = idinvr, y = vcccr))
+p <- ggplot(data = inv, aes(x = idinvr, y = vcccr))
 p
 ```
 
 Veja que os dados e as dimensões dos dados já foram informados, entretanto não nada no gráfico criado por não temos uma geometria definida.
 
-Cada layer tem uma base de dados. Você pode indicar os *dados* na função principal `ggplot()` ou nos layers zonaclimaticaecíficos. O mesmo ocorre para a definição das *dimensões* com a função `aes()`.
+Cada layer tem uma base de dados. Você pode indicar os **dados (data)** na função principal `ggplot()` ou nos layers zonaclimaticaecíficos. O mesmo ocorre para a definição das **dimensões (aesthetics)** com a função `aes()`.
 
-## A camada de *geom*etria
+## As camadas de geometria
 
 O passo seguinte, depois de definir os dados e as dimensões, é adicionar a geometrias. Iremos discutir geometrias em mais detalhe abaixo, mas por agora, vamos adicionar a mais simples de todas: os pontos.
 
@@ -113,13 +119,13 @@ Finalmente, note que nós não precisamos dizer em `geom_point()` quais são as 
 
 ## A camada de estatísticas
 
-Adicionar uma linha de tendência uma suavização é muito simples, veja o exemplo.
+Adicionar uma linha de tendência é muito simples, veja o exemplo.
 
 ```{r}
 p + geom_smooth(method = "lm")
 ```
 
-Nesse gráfico, foi ajustada uma regressão linear com um intervalo de confiança de 95%.
+Nesse gráfico, foi ajustada uma regressão linear com um intervalo de confiança de 95% de y em função de x ( y ~ x ).
 
 Uma coisa importante a entender é que não é necessário incluir os pontos, podemos apresentar somente a linha de tendência.
 
@@ -133,14 +139,14 @@ ggplot(inv, aes(x = idinvr, y = vcccr)) +
 Podemos alterar o nome dos eixos e ainda adicionar título, subtítulo e fonte ao gráfico.
 
 Note também a função `theme_bw()` alterando o *tema* do gráfico daquele cinza horrível.
-É possível ver uma lista de temas disponíveis [aqui](https://mran.microsoft.com/snapshot/2016-12-03/web/packages/ggthemes/vignettes/ggthemes.html)
+É possível ver uma lista de temas disponíveis [aqui](https://mran.microsoft.com/snapshot/2016-12-03/web/packages/ggthemes/vignettes/ggthemes.html).
 
 ```{r}
 p + 
   labs(
     title = "Inventário Florestal Contínuo",
     subtitle = "Mucuri 2018",
-    caption = "Suzano S.A.",
+    caption = "Fonte: Suzano S.A. (uso interno)",
     x = "Idade (anos)",
     y = "Volume Comercial com Casca (m³/ha)"
   ) +
@@ -149,7 +155,7 @@ p +
 
 ## Aesthetics
 
-No ggplot2, *aesthetic* são os elementos gráficos que representam as dimensões dos dados, e que são definidos com `aes()`. Em certa medida, a dimensão que você precisa para definir depende das geometrias que você deseja utilizar. Por exemplo, segmentos de linha tem propriedades geométricas diferentes de pontos. Mas de maneira geral, essa padronização não é problemática.
+No ggplot2, *aesthetics* são os elementos gráficos que representam as dimensões dos dados, e que são definidos com `aes()`. Em certa medida, a dimensão que você precisa para definir depende das geometrias que você deseja utilizar. Por exemplo, segmentos de linha tem propriedades geométricas diferentes de pontos. Mas de maneira geral, essa padronização não é problemática.
 
 * **x**: localização do eixo-X.
 * **y**:  localização do eixo y.
@@ -159,7 +165,6 @@ No ggplot2, *aesthetic* são os elementos gráficos que representam as dimensõe
 * **shape**: zonaclimaticaecífico para pontos, define a forma dele.
 * **linetype**: zonaclimaticaecífico para linhas, define o tipo de linha, caminho, ou borda de uma geometria.
 * **alpha**: Isto define a opacidade de qualquer propriedade geométrica. É mais utilizada quando temos sobreposição de pontos ou linhas e queremos enxergar o que está por de trás.
-* **xend**, **yend**: Você vai usá-los raramente, quando criar um segmento de linha, ou seta. O início do segmento de linha será localizado o x e y, e a extremidade do segmento de linha será definida em xend, yend.
 
 Vamos aplicar a dimensão de cor em função da variável `zonaclimatica`:
 
@@ -168,7 +173,9 @@ ggplot(inv, aes(x = idinvr, y = vcccr, color = zonaclimatica)) +
   geom_point() 
 ```
 
-O ggplot2 gerou automaticamente uma paleta de cores para os dados e criou uma legenda. Tal como acontece com tudo, a paleta de cores também é ajustável, o que será discutido em mais detalhe abaixo. O padrão de cores do ggplot2 é bastante inteligente. Cada cor é equidistante em torno de um círculo de cor HSL, e têm igual luminância. A ideia é que nenhuma categoria tenha maior destaque que outra. Um ponto negativo é que ela pode ser um problema para leitores daltônicos.
+O ggplot2 gerou automaticamente uma paleta de cores para os dados e criou uma legenda. 
+
+Tal como acontece com tudo no ggplot2, a paleta de cores também é ajustável, o que será discutido em mais detalhes abaixo. O padrão de cores do ggplot2 é bastante inteligente. Cada cor é equidistante em torno de um círculo de cor HSL, e têm igual luminância. A ideia é que nenhuma categoria tenha maior destaque que outra. Um ponto negativo é que ela pode ser um problema para leitores daltônicos.
 
 ```{r}
 ggplot(inv,  aes(x = idinvr, y = vcccr)) +
@@ -202,7 +209,7 @@ ggplot(inv, aes(x = idinvr, y = vcccr, shape = zonaclimatica)) +
   geom_point()
 ```
 
-A criação de gráficos com cores é uma atividade comum em muitas situações. Podemos definir se um gráfico será colorido de duas formas, o preenchimento interno da geometria ou a linha externa. Para o primeiro, utilizamos o argumento `fill = <variável>`e para o segundo `color = <variável>`. Note que as variáveis podem ser contínuas ou discretas para ambos os casos.
+A criação de gráficos com cores é uma atividade comum em muitas situações. Podemos definir se um gráfico será colorido de duas formas, o preenchimento interno da geometria ou a linha externa. Para o primeiro, utilizamos o argumento `fill = <variável>`e para o segundo `color = <variável>`. As variáveis podem ser contínuas ou discretas para ambos os casos.
 
 ```{r}
 resumo_zonaclimatica <- inv %>% 
@@ -214,27 +221,27 @@ resumo_zonaclimatica <- inv %>%
     p_falha = weighted.mean(pfalhasr, arearotacao, na.rm = TRUE)
     )
 
-ggplot(resumo_zonaclimatica, aes(zonaclimatica, idinvr)) +
+ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
   geom_col()
 ```
 
-Se quisermos colorir as barras, o primeiro instinto seria provavelmente para definir `color = zonaclimatica`. Mas este argumento considera apenas o contorno das figuras bidimensionais.
+Se quisermos colorir as barras, o primeiro instinto seria provavelmente para definir `color = zonaclimatica`. Mas este argumento considera apenas o contorno das figuras.
 
 ```{r}
-ggplot(resumo_zonaclimatica, aes(zonaclimatica, idinvr, color = zonaclimatica)) +
+ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, color = zonaclimatica)) +
   geom_col()
 ```
 
 O preenchimento é feito utilizando o argumento `fill = zonaclimatica`.
 
 ```{r}
-ggplot(resumo_zonaclimatica, aes(zonaclimatica, idinvr, fill = zonaclimatica)) +
+ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, fill = zonaclimatica)) +
   geom_col()
 ```
 
 ## Geometrias
 
-Até o momento, nós usamos as seguintes geometrias:
+Até o momento, nós usamos as seguintes **geom**etrias:
 
 *  geom_point()
 *  geom_smooth()
@@ -253,26 +260,40 @@ Esta é uma lista bastante extensa, e não iremos ver todo seu conteúdo hoje. M
 O histograma é um gráfico univariado bastante comum no meio científico. Sua principal função é apresentar a distribuição de frequências dos dados.
 
 ```{r}
-ggplot(inv, aes(vcccr)) +
+ggplot(inv, aes(x = vcccr)) +
   geom_histogram()
 ```
 
 Também é possível considerar a distribuição dos Clones de maneira independente e adicionar uma transparência às barras.
 
 ```{r}
-ggplot(inv, aes(vcccr, fill = zonaclimatica)) +
+ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = "identity", alpha = 0.5)
+```
+
+Existem outras formas de enxergar esta distribuição é entendendo a distribuição de cada classe entre os climas. Podemos "empilhar", as barras, de forma que não haja sobreposição ou então ver qual a fatia de cada classe de IMA7 é ocupada por cada clima. Fazemos isso trocando a variável `position` para `stack`, no primeiro caso e `fill`, no segundo. 
+
+Nesse caso não haverá sobreposição, então podemos tirar a variável `alpha`.
+
+```{r}
+ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
+  geom_histogram(position = "stack")
+
+ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
+  geom_histogram(position = "fill")
 ```
 
 ## Texto
 
-Adição de texto e rótulos ao gráfico em forma de geometria. Caso queira inserir uma anotação, utiliza `annotate()`. Uma questão especial Há uma estético especial apenas para `geom_text()` ou `geom_label()` chamadas label, que define a coluna que deve ser utilizada como marcador de texto.
+Adição de texto e rótulos ao gráfico em forma de geometria. Caso queira inserir uma anotação, utiliza-se o `annotate()`. 
+
+Uma questão especial: há uma dimensão `aes()` especial apenas para as funções `geom_text()` e `geom_label()` chamada `label`, que define a coluna que deve ser utilizada como marcador de texto.
 
 ```{r}
-ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr, label = round(ima7ccr))) +
+ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, label = round(ima7ccr))) +
     geom_col() +
     geom_label() +
-    annotate("text", x = 5, y = 120, label = "Anotação")
+    annotate("text", x = 3, y = 50, label = "Anotação")
 ```
 
 ## Boxplot
