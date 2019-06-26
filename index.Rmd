@@ -16,7 +16,7 @@ Instrutores: Edgar Cutar Junior e Italo Cegatta
 
 * [Software RStudio](https://www.rstudio.com/products/rstudio/download/#download)
 
-* [Baixe os slides](https://github.com/edgarcutar/curso_suzano/blob/master/ppt/Introducao.pdf) introdutórios e siga as instruções.  
+* [Baixe os slides](https://github.com/edgarcutar/curso_suzano/raw/master/ppt/Introducao.pdf) introdutórios e siga as instruções.  
 
 
 <br>
