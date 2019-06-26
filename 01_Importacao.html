@@ -415,16 +415,19 @@ $(document).ready(function () {
 <p>A função utilizada para ler arquivos dos dois tipo é a função <code>read_excel()</code>.</p>
 <p>Vamos testar:</p>
 <pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;)</code></pre>
-<p>Alguns comentários: (@) Perceba que usamos o símbolo <code>&lt;-</code>. Esse símbolo “salva” o arquivo lido como um objeto. Caso você não <strong>atribua</strong> esse arquivo a um objeto, o R simplesmente irá ler o seu arquivo e <em>printar</em> a tabela lida na sua tela.</p>
-<pre class="r"><code>read_excel(&quot;data/nimbus.xlsx&quot;)</code></pre>
-<ol class="example" style="list-style-type: decimal">
-<li>A função <code>read_excel()</code> tem algumas particularidades. Caso seja usada sem mais nenhum parâmetro (já vamos chegar lá), ela:</li>
+<p>Alguns comentários:</p>
+<ol style="list-style-type: decimal">
+<li>Perceba que usamos o símbolo <code>&lt;-</code>. Esse símbolo “salva” o arquivo lido como um objeto. Caso você não <strong>atribua</strong> esse arquivo a um objeto, o R simplesmente irá ler o seu arquivo e <em>printar</em> a tabela lida na sua tela.</li>
 </ol>
-<ol style="list-style-type: lower-alpha">
+<pre class="r"><code>read_excel(&quot;data/nimbus.xlsx&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>A função <code>read_excel()</code> tem algumas particularidades. Caso seja usada sem mais nenhum parâmetro (já vamos chegar lá), ela:
+<ul>
 <li>Lê os arquivos a partir da primeira linha;</li>
 <li>Considera a primeira linha lida como “cabeçalho” (header);</li>
 <li>Lê a primeira aba da planilha;</li>
 <li>“Advinha” o tipo de dado em cada coluna (número, texto, lógico etc).</li>
+</ul></li>
 </ol>
 </div>
 <div id="os-parametros-da-funcao-read_excel" class="section level2">
@@ -550,12 +553,9 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <td>DBI</td>
 <td>databases</td>
 </tr>
-<tr class="odd">
-<td>sparklyr</td>
-<td>dados carregados no spark (Big Data)</td>
-</tr>
 </tbody>
 </table>
+<p>sparklyr | dados carregados no spark (Big Data)</p>
 </div>
 <div id="bonus---ctrl-c-e-ctrl-v-no-r" class="section level2">
 <h2>Bônus - Ctrl C e Ctrl V no R?</h2>

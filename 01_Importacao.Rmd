@@ -63,17 +63,18 @@ nimbus <- read_excel("data/nimbus.xlsx")
 ```
 
 Alguns comentários:
-(@) Perceba que usamos o símbolo `<-`. Esse símbolo "salva" o arquivo lido como um objeto. Caso você não **atribua** esse arquivo a um objeto, o R simplesmente irá ler o seu arquivo e *printar* a tabela lida na sua tela.
+
+1.  Perceba que usamos o símbolo `<-`. Esse símbolo "salva" o arquivo lido como um objeto. Caso você não **atribua** esse arquivo a um objeto, o R simplesmente irá ler o seu arquivo e *printar* a tabela lida na sua tela.
 
 ```{r}
 read_excel("data/nimbus.xlsx")
 ```
 
-(@) A função `read_excel()` tem algumas particularidades. Caso seja usada sem mais nenhum parâmetro (já vamos chegar lá), ela:
-  a) Lê os arquivos a partir da primeira linha;
-  b) Considera a primeira linha lida como "cabeçalho" (header);
-  c) Lê a primeira aba da planilha;
-  d) "Advinha" o tipo de dado em cada coluna (número, texto, lógico etc).
+2.  A função `read_excel()` tem algumas particularidades. Caso seja usada sem mais nenhum parâmetro (já vamos chegar lá), ela:
+    + Lê os arquivos a partir da primeira linha;
+    + Considera a primeira linha lida como "cabeçalho" (header);
+    + Lê a primeira aba da planilha;
+    + "Advinha" o tipo de dado em cada coluna (número, texto, lógico etc).
 
 
 ## Os parâmetros da função read_excel
@@ -167,6 +168,7 @@ xml2     | xml
 httr     | web API's
 rvest    | páginas web (web scraping)
 DBI      | databases
+
 sparklyr | dados carregados no spark (Big Data)
 
 
