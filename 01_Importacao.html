@@ -378,9 +378,141 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#o-pacote-readxl">O pacote readxl</a></li>
+<li><a href="#a-funcao-read_excel">A função read_excel</a></li>
+<li><a href="#os-parametros-da-funcao-read_excel">Os parâmetros da função read_excel</a></li>
+<li><a href="#outras-funcoes-para-importar-arquivos.">Outras funções para importar arquivos.</a></li>
+<li><a href="#o-pacote-readr-e-seus-filhos">O pacote readr e seus filhos</a></li>
+<li><a href="#outros-tipos-de-arquivo">Outros tipos de arquivo</a></li>
+<li><a href="#bonus---ctrl-c-e-ctrl-v-no-r">Bônus - Ctrl C e Ctrl V no R?</a></li>
+</ul>
+</div>
 
-<p>Existem diversas</p>
-<p>O <code>ggplot2</code>é o pacote mais utilizado para criação de gráficos no R. Ele implementa a Gramática dos Gráficos proposta por Leland Wilkinson em seu livro <a href="https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448">The Grammar of Graphics</a>. A ideia é que há uma gramática racional e computacional para a composição de gráficos estatísticos. Ao controlar a gramática, você pode gerar um grande conjunto de gráficos cuidadosamente construídos a partir de um conjunto relativamente pequeno de operações.</p>
+<p>Neste primeiro módulo, iremos abordar o básico de como importar arquivos tabulares para dentro do R.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<p>Em primeiro lugar, é interessante entender como o R trata o seu <strong>Diretório de Trabalho (working directory)</strong>. Para isso, vamos abordar a importância dos <strong>PROJETOS</strong>.</p>
+<p>Ao abrir esse curso utilizando a função <code>use_course()</code>, o RStudio automaticamente baixou os arquivos do curso e abriu uma nova janela do RStudio. Ali no canto superior direito do RStudio deve ter um escrito “curso_suzano”. Se não estiver, ou se estiver escrito “Project: (none)”, levante a mão e nos avise porque alguma coisa deu errado.</p>
+<p>Um projeto no R é determinado por um arquivo “.Rproj”. Ao clicar duas vezes nesse arquivo (ou usar o <code>use_course()</code>), o RStudio entenderá que aquela pasta é seu diretório de Trabalho.</p>
+<p>Ao rodar a função abaixo, você obterá a pasta onde foi extraído o <em>curso_suzano.zip</em>.</p>
+<pre class="r"><code>getwd()</code></pre>
+<p>O R só entendeu essa pasta como seu diretório de trabalho porque você está em um projeto. Caso contrário, sua pasta inicial, por <em>default</em>, seria a pasta “C:/users/<em>seu_usuario</em>/Documents”, que é o diretório onde o R provavelmente está instalado.</p>
+<p>Nossa recomendação é sempre trabalhar: * Dentro de um projeto; * Colocar todos os arquivos que serão utilizados dentro do projeto.</p>
+<p>Dessa forma, pra compartilhar um projeto do R com outro usuário de sua equipe, basta mandar a pasta inteira, e tudo estará lá dentro pronto pra usar.</p>
+<p>Dito isso, vamos ao que interessa:</p>
+<div id="o-pacote-readxl" class="section level2">
+<h2>O pacote readxl</h2>
+<p>O pacote <code>readxl</code> é um pacote que, apesar de fazer parte do <em>core</em> do Tidyverse, de forma que você vai precisar carregá-lo manualmente todas as sessões usando o <code>library(readxl)</code>.</p>
+<pre class="r"><code>library(readxl)</code></pre>
+<p>O pacote <code>readxl</code> é pensado para ler tanto arquivos antigos, no formato <code>.xls</code>, do Excel 98-2003, quanto os arquivos modernos <code>.xlsx</code>.</p>
+<p>Para testar esse arquivo, dentro da pasta <em>data</em> do curso, temos um arquivo chamado <code>nimbus.xlsx</code>.</p>
+<blockquote>
+<p>A planilha <code>nimbus</code> é uma tabela que vamos usar como exemplo, contendo medições de ozônio no hemisfério sul, coletadas pelo satélite NIMBUS-7 da NASA em Outubro de 1985. É um set de dados histórico, porque mostrou evidência do buraco na camada de ozônio logo depois que o buraco foi reportado pela primeira vez.</p>
+</blockquote>
+</div>
+<div id="a-funcao-read_excel" class="section level2">
+<h2>A função read_excel</h2>
+<p>A função utilizada para ler arquivos dos dois tipo é a função <code>read_excel()</code>.</p>
+<p>Vamos testar:</p>
+<pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;)</code></pre>
+<p>Alguns comentários: (@) Perceba que usamos o símbolo <code>&lt;-</code>. Esse símbolo “salva” o arquivo lido como um objeto. Caso você não <strong>atribua</strong> esse arquivo a um objeto, o R simplesmente irá ler o seu arquivo e <em>printar</em> a tabela lida na sua tela.</p>
+<pre class="r"><code>read_excel(&quot;data/nimbus.xlsx&quot;)</code></pre>
+<ol class="example" style="list-style-type: decimal">
+<li>A função <code>read_excel()</code> tem algumas particularidades. Caso seja usada sem mais nenhum parâmetro (já vamos chegar lá), ela:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Lê os arquivos a partir da primeira linha;</li>
+<li>Considera a primeira linha lida como “cabeçalho” (header);</li>
+<li>Lê a primeira aba da planilha;</li>
+<li>“Advinha” o tipo de dado em cada coluna (número, texto, lógico etc).</li>
+</ol>
+</div>
+<div id="os-parametros-da-funcao-read_excel" class="section level2">
+<h2>Os parâmetros da função read_excel</h2>
+<p>Para contornar esses padrões, é necessário fazer isso, explicitamente, ao chamar a função. Vamos a alguns exemplos:</p>
+<ul>
+<li>Ler um arquivo a partir de outra linha que não a primeira.
+<ul>
+<li>Para isso, vamos usar o parâmetro <code>skip</code>, e informar quantas linhas queremos “pular”. Nesse caso, não vai fazer sentido, pois nossa informação começa na linha 01 mesmo.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, skip = 1)</code></pre>
+<ul>
+<li>Ler outras abas da planilha
+<ul>
+<li>Em primeiro lugar, vamos usar a função <code>excel_sheets()</code> que nos mostra quais são as abas da planilha em questão;</li>
+<li>Em seguida, vamos usar o parâmetro <code>sheet</code> pra nomear qual aba vamos ler. Nesse caso só existe uma aba, mas você entendeu como funciona, né?</li>
+</ul></li>
+</ul>
+<pre class="r"><code>excel_sheets(&quot;data/nimbus.xlsx&quot;)
+
+nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;)</code></pre>
+<ul>
+<li>Determinar qual o tipo de dado em uma determinada coluna (ou em todas elas)
+<ul>
+<li>Na aba <code>Environment</code>, no quadrado superior direito do RStudio, você vai ver o objeto <code>nimbus</code>, que importamos para o R nos blocos acima. Você vai ver que a coluna <code>date</code> foi lida corretamente como o tipo <em>num (número)</em>, ou seja, o R entendeu que ela é um número, não uma data;</li>
+<li>Vamos corrigir isso utilizando o parâmetro <code>col_types</code>;</li>
+<li>No parâmetro <code>col_types</code>, podemos atualizar todas as colunas, mas só vamos atualizar a coluna <code>date</code>, deixando o R advinhar o resto.</li>
+</ul></li>
+</ul>
+<pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, col_types = c(&quot;date&quot;, &quot;guess&quot;, &quot;guess&quot;, &quot;guess&quot;))</code></pre>
+<p>O perigoso aqui é que, caso você erre o tipo da coluna e o R não consiga converter para o tipo de dado que você indicou, todos os dados daquela coluna serão lidos como vazios (ou <code>NA</code>, que é o código para não-valor do R). Em tabelas muito grandes essa etapa pode ser um pouco complicada, caso sua base não esteja organizada antes de importar.</p>
+<p>Existem diversos outros parâmetros para a função <code>read_excel()</code>, assim como para qualquer outra função. O jeito mais simples de saber todos eles é através da função de ajuda. Podemos acessar o tópico de ajuda para qualquer função utilizando o símbolo <code>?</code> antes do nome da mesma, como em <code>?funcao</code>.</p>
+<p>Vamos tentar:</p>
+</div>
+<div id="outras-funcoes-para-importar-arquivos." class="section level2">
+<h2>Outras funções para importar arquivos.</h2>
+<p>No nosso dia a dia, os arquivos em formato excel são os mais comuns, mas você pode receber também em outros formatos, como o <code>.csv</code>, que também é bem comum.</p>
+<p>Para o csv, em específico, existe um pacote do Tidyverse chamado readr. CSVs têm uma particularidade importante de ser abordada.</p>
+</div>
+<div id="o-pacote-readr-e-seus-filhos" class="section level2">
+<h2>O pacote readr e seus filhos</h2>
+<p>O pacote <code>readr</code> possui uma serie de funções associadas para leitura de diversos tipos de arquivos:</p>
+<p>Função | Tipo de arquivo</p>
+<p>————– | ————————–</p>
+<p><code>read_csv()</code> | Comma separated values</p>
+<p><code>read_csv2()</code> | Semi-colon separate values</p>
+<p><code>read_delim()</code> | General delimited files</p>
+<p><code>read_fwf()</code> | Fixed width files</p>
+<p><code>read_log()</code> | Apache log files</p>
+<p><code>read_table()</code> | Space separated files</p>
+<p><code>read_tsv()</code> | Tab delimited values</p>
+<p>Para os arquivos mais comuns, aqueles do tipo CSV, existe um truque cultural.</p>
+<p>Apesar de CSV significar <strong>COMMA SEPARATED VALUES</strong>, ou “Valores Separados por Vírgula”, quando um sistema operacional em língua portuguesa salva um CSV, os valores não são separados por vírgula, e sim por ponto-e-vírgula.</p>
+<blockquote>
+<p>“Mas por quê, meu consagrado?”, você deve estar se perguntando</p>
+</blockquote>
+<p>Porque nós, assim como alguns outros países, utilizamos a vírgula como separador decimal, o que faria uma confusão dos diabos caso utilizássemos a vírgula também como separador de valores. No caso de um arquivo gringo, ou exportado de alguns sistemas, o ponto é o separador decimal, o que deixa a vírgula livre para ser o separador dos valores.</p>
+<p>Por isso, existem duas funções separadas para ler arquivos, dependendo de sua origem: a função <code>read_csv</code>, para arquivos csv “gringos” (os separados por vírgula mesmo), e <code>read_csv2</code>, para arquivos csv “brasileiros” (os separados por ponto-e-vírgula).</p>
+<p>Deixei dois arquivos <code>nimbus</code> na pasta <code>data</code>, cada um em um formato, pra gente treinar.</p>
+<p>Agora é com você. Case a função com o arquivo correto e verifique se leu corretamente ali na aba “Environment”.</p>
+</div>
+<div id="outros-tipos-de-arquivo" class="section level2">
+<h2>Outros tipos de arquivo</h2>
+<p>Além de arquivos de excel, e arquivos “planos” (como são chamados aqueles lidos pelo pacote <code>readr</code>), você pode se deparar com uma série de outros tipos de arquivos tabulares.</p>
+<p>Abaixo uma lista de pacotes para outros tipos:</p>
+<p>Pacote | Tipo de arquivo</p>
+<p>——– | —–</p>
+<p>haven | SPSS, Stata, e SAS files</p>
+<p>jsonlite | json</p>
+<p>xml2 | xml</p>
+<p>httr | web API’s</p>
+<p>rvest | páginas web (web scraping)</p>
+<p>DBI | databases</p>
+<p>sparklyr | dados carregados no spark (Big Data)</p>
+</div>
+<div id="bonus---ctrl-c-e-ctrl-v-no-r" class="section level2">
+<h2>Bônus - Ctrl C e Ctrl V no R?</h2>
+<p>Como bônus, vamos ensinar vocês a colar <em>pequenas</em> tabelas direto no R.</p>
+<p>Para isso, vamos precisar instalar o pacote <code>datapasta</code>.</p>
+<p>Agora, você pode copiar um pequeno pedaço de tabela (Abra a <code>nimbus</code> no excel e copie as 10 primeiras linhas). Voltando aqui pro RStudio abra</p>
+<pre><code>    Tools &gt; Addins &gt; Browse Addins &gt; Paste as tribble &gt; Execute</code></pre>
+<p>Faça isso no espaço abaixo.</p>
+<p>Você vai perceber alguns problemas. A Data vai vir como caractere, as vírgulas desapareceram (você teria que trocar por ponto no excel antes de copiar).</p>
+<p>De toda forma, as vezes esse truque pode ser útil.</p>
+<p>Você consegue, dentro do “Browse Addins”, configurar “atalhos” para esse (e outros) Addins. Aqui no meu computador, por exemplo, eu configurei como <em>Ctrl + Shift + V</em> pra colar como tribble.</p>
+</div>
 
 
 
