@@ -112,7 +112,7 @@ Existem diversos outros parâmetros para a função `read_excel()`, assim como p
 
 Vamos tentar:
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 ?read_excel
 ```
 
