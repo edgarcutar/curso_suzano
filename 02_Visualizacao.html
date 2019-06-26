@@ -293,7 +293,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="material.html">Comece aqui</a>
+  <a href="ppt/Introducao.pdf">Comece aqui</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -456,7 +456,7 @@ $(document).ready(function () {
 </div>
 <div id="os-dados" class="section level2">
 <h2>Os dados</h2>
-<p>O primeiro argumento da função <code>ggplot()</code> é um <code>data.frame</code>, e seu segundo argumento é <code>aes()</code>.</p>
+<p>O primeiro parâmetro da função <code>ggplot()</code> é um <code>data.frame</code>, e seu segundo parâmetro é <code>aes()</code>.</p>
 <pre class="r"><code>library(tidyverse)
 library(readxl)
 
@@ -474,8 +474,8 @@ p</code></pre>
 p</code></pre>
 <p>Note que não é necessário ficar criando novos objetos a cada camada. Você pode adicionar as camadas de forma contínua usando o operador <code>+</code>.</p>
 <pre class="r"><code>p + geom_point()</code></pre>
-<p>Cada camada é feita por uma função. Algumas não precisarão de argumentos pois será utilizado o <em>default</em>. No exemplo anterior, fizemos um gráfico e adicionamos a camada de ponto <code>geom_point()</code>, por padrão, serão mostrados pontos pretos e sólidos de tamanho 1.</p>
-<p>Caso você queira alterar o formato do ponto, basta zonaclimaticaecificar no argumento indicado.</p>
+<p>Cada camada é feita por uma função. Algumas não precisarão de parâmetros pois será utilizado o <em>default</em>. No exemplo anterior, fizemos um gráfico e adicionamos a camada de ponto <code>geom_point()</code>, por padrão, serão mostrados pontos pretos e sólidos de tamanho 1.</p>
+<p>Caso você queira alterar o formato do ponto, basta zonaclimaticaecificar no parâmetro indicado.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_point(shape = 2)</code></pre>
 <p>Ou, se quiséssemos usar pontos vermelhos e maiores, poderíamos definir:</p>
@@ -543,7 +543,7 @@ p</code></pre>
 <p>É importante lembrar que não é só a dimensão de cor que gera sub-agrupamentos no gráfico. Se utilizarmos a forma para diferenciar a variável, essa definição também será herdade nos layers subsequentes.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr, shape = zonaclimatica)) +
   geom_point()</code></pre>
-<p>A criação de gráficos com cores é uma atividade comum em muitas situações. Podemos definir se um gráfico será colorido de duas formas, o preenchimento interno da geometria ou a linha externa. Para o primeiro, utilizamos o argumento <code>fill = &lt;variável&gt;</code>e para o segundo <code>color = &lt;variável&gt;</code>. As variáveis podem ser contínuas ou discretas para ambos os casos.</p>
+<p>A criação de gráficos com cores é uma atividade comum em muitas situações. Podemos definir se um gráfico será colorido de duas formas, o preenchimento interno da geometria ou a linha externa. Para o primeiro, utilizamos o parâmetro <code>fill = &lt;variável&gt;</code>e para o segundo <code>color = &lt;variável&gt;</code>. As variáveis podem ser contínuas ou discretas para ambos os casos.</p>
 <pre class="r"><code>resumo_zonaclimatica &lt;- inv %&gt;% 
   group_by(zonaclimatica) %&gt;%
   summarise(
@@ -555,10 +555,10 @@ p</code></pre>
 
 ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
   geom_col()</code></pre>
-<p>Se quisermos colorir as barras, o primeiro instinto seria provavelmente para definir <code>color = zonaclimatica</code>. Mas este argumento considera apenas o contorno das figuras.</p>
+<p>Se quisermos colorir as barras, o primeiro instinto seria provavelmente para definir <code>color = zonaclimatica</code>. Mas este parâmetro considera apenas o contorno das figuras.</p>
 <pre class="r"><code>ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, color = zonaclimatica)) +
   geom_col()</code></pre>
-<p>O preenchimento é feito utilizando o argumento <code>fill = zonaclimatica</code>.</p>
+<p>O preenchimento é feito utilizando o parâmetro <code>fill = zonaclimatica</code>.</p>
 <pre class="r"><code>ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, fill = zonaclimatica)) +
   geom_col()</code></pre>
 </div>
@@ -636,19 +636,19 @@ resumo_zonaclimatica_estado %&gt;%
 </div>
 <div id="densidade" class="section level2">
 <h2>Densidade</h2>
-<p>Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma eu de gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do peso dos participantes do curso.</p>
+<p>Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do <code>geom_density</code> é que a <strong>integral</strong> do gráfico seja igual a 1.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr)) +
   geom_density()</code></pre>
-<p>Podemos identificar a distribuição do zonaclimatica através de cores.</p>
+<p>Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
   geom_density()</code></pre>
-<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = &quot;identity&quot;</code>. Isso significa que pode haver (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
+<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = &quot;identity&quot;</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(alpha = 0.3)</code></pre>
-<p>Caso o interesse seja ver a contribuição de cada sexo para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = &quot;stack&quot;</code></p>
+<p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = &quot;stack&quot;</code> que, como o nome indica, empilha os gráficos.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(position = &quot;stack&quot;)</code></pre>
-<p>A próxima variação é tratar os valores em porcentagem, do mesmo modo que fizemos com as barras.</p>
+<p>A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(position = &quot;fill&quot;)</code></pre>
 </div>
@@ -667,16 +667,16 @@ resumo_zonaclimatica_estado %&gt;%
   geom_dotplot(
     binaxis=&quot;y&quot;,
     stackdir=&quot;center&quot;,
-    dotsize = 1
+    dotsize = 0.5
   )</code></pre>
 </div>
 <div id="escalas" class="section level2">
 <h2>Escalas</h2>
 <p>Todos os tipos de escala (eixos x e y, cor, preenchimento e tamanho) tem funções zonaclimaticaecíficas de controle e podem ser totalmente customizadas.</p>
-<p>Os eixos, por exemplo, são modificados pelas funções com o prefixo <code>scale_[x|y]_**()</code>.</p>
+<p>Os eixos, por exemplo, são modificados pelas funções com o prefixo <code>scale_[x|y]_**()</code>. Abaixo os tipos de <code>scale_x_**</code>, que se repetem para o eixo y</p>
 <pre class="r"><code>apropos(&quot;^scale_x_&quot;)</code></pre>
-<p><code>scale_x_continuous</code>, <code>scale_x_discrete</code>, <code>scale_x_datetime</code> e <code>scale_x_date</code> são os tipos básicos de eixos x e y que você pode modificar no ggplot2. <code>scale_x_log10</code>, <code>scale_x_sqrt</code> e <code>scale_x_reverse</code> são transformações básicas para uma escala contínua. Também veremos como criar nossa nossa sequência para composição de eixos.</p>
-<p>Existem alguns argumentos básicos par as funções relacionadas às escalas numéricas.</p>
+<p>Os eixos <code>scale_x_continuous</code>, <code>scale_x_discrete</code>, <code>scale_x_datetime</code> e <code>scale_x_date</code> são os tipos básicos de eixos x e y que você pode modificar no ggplot2. Já <code>scale_x_log10</code>, <code>scale_x_sqrt</code> e <code>scale_x_reverse</code> são transformações básicas para uma escala contínua. Também veremos como criar nossa nossa sequência para composição de eixos.</p>
+<p>Existem alguns parâmetros básicos para as funções relacionadas às escalas numéricas.</p>
 <ul>
 <li><strong>name</strong>: Nome do eixo ou títul da legenda.</li>
 <li><strong>limits</strong>: Define o intervalo que os dados serão apresentados no gráfico.</li>
@@ -686,31 +686,34 @@ resumo_zonaclimatica_estado %&gt;%
 </div>
 <div id="scale_xy_continuous" class="section level2">
 <h2>scale_[xy]_continuous</h2>
-<p>O ggplot2 determina uma escala e limite padrão para os gráficos de acordo com a escala de variação. Às vezes, queremos maior detalhe da escala e por isso temos que modificar os argumentos.</p>
+<p>O ggplot2 determina uma escala e limite padrão para os gráficos de acordo com a escala de variação. Às vezes, queremos maior ou menor detalhe na escala e por isso temos que modificar os parâmetros</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point()</code></pre>
-<p>A alteração dos <code>breaks</code> é feita por um vetor que indica onde será adicionado o marcador do eixo.</p>
+<p>A alteração dos <code>breaks</code> é feita por um vetor que indica onde será adicionado o marcador do eixo. A função <code>seq</code> tem 3 parâmetros: <code>from</code>, <code>to</code>e <code>by</code>,</p>
+<p>Nesse caso <code>seq(0, 10, 1)</code> significa que queremos uma sequência de números entre 0 e 10, de 1 em 1, e isso vai se traduzir em <code>breaks</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point() +
   scale_x_continuous(breaks = seq(0, 10, 1))</code></pre>
-<p>Caso seja interessante altera o rotulo do marcador, temos que criar um novo vetor que contem os nomes.</p>
+<p>Caso seja interessante alterar o rotulo do marcador, temos que criar um novo vetor que contenha os nomes, utilizando o parâmetro <code>labels</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point() +
-  scale_x_continuous(breaks = seq(0, 10, 1), labels = paste(seq(0, 10, 1), &quot;anos&quot;))</code></pre>
+  scale_x_continuous(breaks = seq(0, 10, 1), 
+                     labels = str_c(seq(0, 10, 1), &quot; anos&quot;))</code></pre>
 </div>
 <div id="escalas-de-cor" class="section level2">
 <h2>Escalas de cor</h2>
-<p>A paleta de cor é um ponto crítico em um gráfico. Muitas vezes utilizamos a dimensão de cor para comparar algo e por este motivo devemos escolher com cuidado as cores que iremos colocar. O ggplot2 disponibiliza algumas paletas e funções à nossa disposição. Vocês podem pesquisar cada uma delas mais tarde e ver qual o diferencial que cada uma trás.</p>
+<p>A paleta de cor é um ponto crítico em um gráfico. Muitas vezes utilizamos a dimensão de cor para comparar algo e por este motivo devemos escolher com cuidado as cores que iremos colocar. O ggplot2 disponibiliza algumas paletas e funções de cores. Vocês podem pesquisar cada uma delas mais tarde e ver qual o diferencial que cada uma trás.</p>
 <pre class="r"><code>apropos(&quot;^scale_color_&quot;)</code></pre>
 <p>A característica basica é que existem funções para variáveis discretas e funções para variáis contínuas. Para variáveis discretas, por exemplo, a função padrão é a <code>scale_[fill|color]_hue()</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_fill_hue()</code></pre>
-<p>O pacote <code>RColorBrewer</code> disponibiliza um conjunto de paletas que podem ser incorporadas no ggplot2. basta identificar qual você deseja. Há paletas sequenciais e paletas divergentes. Caso queria ver as paletas, explore pelo comando <code>RColorBrewer::display.brewer.all()</code>. No gráfico, basta indicar o nome da paleta no argumento <code>palette</code>.</p>
+<p>O pacote <code>RColorBrewer</code> disponibiliza um conjunto de paletas que podem ser incorporadas no ggplot2. basta identificar qual você deseja. Há paletas sequenciais e paletas divergentes. Caso queria ver as paletas, explore pelo comando <code>RColorBrewer::display.brewer.all()</code>.</p>
+<p>No gráfico, basta indicar o nome da paleta no parâmetro <code>palette</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
-<p>Caso você queria colocar suas proprias cores, terá de fazer isso manualmente. Eu recomendo o site <a href="http://colorbrewer2.org/" class="uri">http://colorbrewer2.org/</a>. A partir do código hexadecimal, podemos colocar as cores que queremos com a função <code>scale_[color|fill]_manual()</code>. Os <a href="https://www.centraldamarcasuzano.com.br/pt/materiais-do-dia-a-dia#materiais-de-papelaria">templates de PowerPoint da Suzano</a> tem os hexadecimais das cores das paletas oficiais em um slide.</p>
+<p>Caso você queria colocar suas proprias cores, terá de fazer isso manualmente. Eu recomendo o site <a href="http://colorbrewer2.org/" class="uri">http://colorbrewer2.org/</a>. A partir do código hexadecimal, podemos colocar as cores que queremos com a função <code>scale_[color|fill]_manual()</code>. Os <a href="https://www.centraldamarcasuzano.com.br/pt/materiais-do-dia-a-dia#materiais-de-papelaria">templates de PowerPoint da Suzano</a> contém os hexadecimais das cores das paletas oficiais em um slide no final do modelo.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_color_manual(values = c(&quot;red&quot;, &quot;darkgreen&quot;, &quot;gold&quot;,  &quot;#fc9272&quot;, &quot;#4a1486&quot;))</code></pre>
