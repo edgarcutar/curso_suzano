@@ -506,9 +506,11 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <h2>Bônus - Ctrl C e Ctrl V no R?</h2>
 <p>Como bônus, vamos ensinar vocês a colar <em>pequenas</em> tabelas direto no R.</p>
 <p>Para isso, vamos precisar instalar o pacote <code>datapasta</code>.</p>
+<pre class="r"><code>install.packages(&quot;datapasta&quot;)
+library(datapasta)</code></pre>
 <p>Agora, você pode copiar um pequeno pedaço de tabela (Abra a <code>nimbus</code> no excel e copie as 10 primeiras linhas). Voltando aqui pro RStudio abra</p>
 <pre><code>    Tools &gt; Addins &gt; Browse Addins &gt; Paste as tribble &gt; Execute</code></pre>
-<p>Faça isso no espaço abaixo.</p>
+<p>Faça isso no espaço abaixo:</p>
 <p>Você vai perceber alguns problemas. A Data vai vir como caractere, as vírgulas desapareceram (você teria que trocar por ponto no excel antes de copiar).</p>
 <p>De toda forma, as vezes esse truque pode ser útil.</p>
 <p>Você consegue, dentro do “Browse Addins”, configurar “atalhos” para esse (e outros) Addins. Aqui no meu computador, por exemplo, eu configurei como <em>Ctrl + Shift + V</em> pra colar como tribble.</p>

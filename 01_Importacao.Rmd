@@ -12,9 +12,7 @@ knitr::opts_chunk$set(results = "hide", fig.show = "hide", message = FALSE, warn
 Neste primeiro módulo, iremos abordar o básico de como importar arquivos tabulares para dentro do R.
 
 ```{r}
-
 library(tidyverse)
-
 ```
 
 Em primeiro lugar, é interessante entender como o R trata o seu **Diretório de Trabalho (working directory)**. Para isso, vamos abordar a importância dos **PROJETOS**.
@@ -195,7 +193,7 @@ Como bônus, vamos ensinar vocês a colar *pequenas* tabelas direto no R.
 
 Para isso, vamos precisar instalar o pacote `datapasta`.
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 install.packages("datapasta")
 library(datapasta)
 ```
@@ -204,9 +202,12 @@ Agora, você pode copiar um pequeno pedaço de tabela (Abra a `nimbus` no excel 
 
         Tools > Addins > Browse Addins > Paste as tribble > Execute
 
-Faça isso no espaço abaixo.
+Faça isso no espaço abaixo:
         
-```{r}
+```{r echo=TRUE}
+
+
+
 
 ```
 
