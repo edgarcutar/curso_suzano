@@ -112,37 +112,28 @@ Existem diversos outros parâmetros para a função `read_excel()`, assim como p
 
 Vamos tentar:
 
-```{r eval=FALSE}
+```{r eval=FALSE }
 ?read_excel
 ```
 
-## Outras funções para importar arquivos.
+
+## O pacote readr e seus filhos
 
 No nosso dia a dia, os arquivos em formato excel são os mais comuns, mas você pode receber também em outros formatos, como o `.csv`, que também é bem comum.
 
 Para o csv, em específico, existe um pacote do Tidyverse chamado readr. CSVs têm uma particularidade importante de ser abordada.
 
-## O pacote readr e seus filhos
-
 O pacote `readr` possui uma serie de funções associadas para leitura de diversos tipos de arquivos:
 
-Função       | Tipo de arquivo
-
--------------- | --------------------------
-
-`read_csv()`   | Comma separated values
-
-`read_csv2()`  | Semi-colon separate values
-
-`read_delim()` | General delimited files
-
-`read_fwf()`   | Fixed width files
-
-`read_log()`   | Apache log files
-
-`read_table()` | Space separated files
-
-`read_tsv()`   | Tab delimited values
+Função              | Tipo de arquivo 
+------------------  | ------------------
+`read_csv()`        | Comma separated values
+`read_csv2()`       | Semi-colon separate values
+`read_delim()`      | General delimited files
+`read_fwf()`        | Fixed width files
+`read_log()`        | Apache log files
+`read_table()`      | Space separated files
+`read_tsv()`        | Tab delimited values
 
 Para os arquivos mais comuns, aqueles do tipo CSV, existe um truque cultural.
 
@@ -169,21 +160,13 @@ Além de arquivos de excel, e arquivos "planos" (como são chamados aqueles lido
 Abaixo uma lista de pacotes para outros tipos:
 
 Pacote  | Tipo de arquivo
-
 -------- | -----
-
 haven    | SPSS, Stata, e SAS files
-
 jsonlite | json
-
 xml2     | xml
-
 httr     | web API's
-
 rvest    | páginas web (web scraping)
-
 DBI      | databases
-
 sparklyr | dados carregados no spark (Big Data)
 
 

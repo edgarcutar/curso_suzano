@@ -383,7 +383,6 @@ $(document).ready(function () {
 <li><a href="#o-pacote-readxl">O pacote readxl</a></li>
 <li><a href="#a-funcao-read_excel">A função read_excel</a></li>
 <li><a href="#os-parametros-da-funcao-read_excel">Os parâmetros da função read_excel</a></li>
-<li><a href="#outras-funcoes-para-importar-arquivos.">Outras funções para importar arquivos.</a></li>
 <li><a href="#o-pacote-readr-e-seus-filhos">O pacote readr e seus filhos</a></li>
 <li><a href="#outros-tipos-de-arquivo">Outros tipos de arquivo</a></li>
 <li><a href="#bonus---ctrl-c-e-ctrl-v-no-r">Bônus - Ctrl C e Ctrl V no R?</a></li>
@@ -462,23 +461,49 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <p>Vamos tentar:</p>
 <pre class="r"><code>?read_excel</code></pre>
 </div>
-<div id="outras-funcoes-para-importar-arquivos." class="section level2">
-<h2>Outras funções para importar arquivos.</h2>
-<p>No nosso dia a dia, os arquivos em formato excel são os mais comuns, mas você pode receber também em outros formatos, como o <code>.csv</code>, que também é bem comum.</p>
-<p>Para o csv, em específico, existe um pacote do Tidyverse chamado readr. CSVs têm uma particularidade importante de ser abordada.</p>
-</div>
 <div id="o-pacote-readr-e-seus-filhos" class="section level2">
 <h2>O pacote readr e seus filhos</h2>
+<p>No nosso dia a dia, os arquivos em formato excel são os mais comuns, mas você pode receber também em outros formatos, como o <code>.csv</code>, que também é bem comum.</p>
+<p>Para o csv, em específico, existe um pacote do Tidyverse chamado readr. CSVs têm uma particularidade importante de ser abordada.</p>
 <p>O pacote <code>readr</code> possui uma serie de funções associadas para leitura de diversos tipos de arquivos:</p>
-<p>Função | Tipo de arquivo</p>
-<p>————– | ————————–</p>
-<p><code>read_csv()</code> | Comma separated values</p>
-<p><code>read_csv2()</code> | Semi-colon separate values</p>
-<p><code>read_delim()</code> | General delimited files</p>
-<p><code>read_fwf()</code> | Fixed width files</p>
-<p><code>read_log()</code> | Apache log files</p>
-<p><code>read_table()</code> | Space separated files</p>
-<p><code>read_tsv()</code> | Tab delimited values</p>
+<table>
+<thead>
+<tr class="header">
+<th>Função</th>
+<th>Tipo de arquivo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read_csv()</code></td>
+<td>Comma separated values</td>
+</tr>
+<tr class="even">
+<td><code>read_csv2()</code></td>
+<td>Semi-colon separate values</td>
+</tr>
+<tr class="odd">
+<td><code>read_delim()</code></td>
+<td>General delimited files</td>
+</tr>
+<tr class="even">
+<td><code>read_fwf()</code></td>
+<td>Fixed width files</td>
+</tr>
+<tr class="odd">
+<td><code>read_log()</code></td>
+<td>Apache log files</td>
+</tr>
+<tr class="even">
+<td><code>read_table()</code></td>
+<td>Space separated files</td>
+</tr>
+<tr class="odd">
+<td><code>read_tsv()</code></td>
+<td>Tab delimited values</td>
+</tr>
+</tbody>
+</table>
 <p>Para os arquivos mais comuns, aqueles do tipo CSV, existe um truque cultural.</p>
 <p>Apesar de CSV significar <strong>COMMA SEPARATED VALUES</strong>, ou “Valores Separados por Vírgula”, quando um sistema operacional em língua portuguesa salva um CSV, os valores não são separados por vírgula, e sim por ponto-e-vírgula.</p>
 <blockquote>
@@ -493,15 +518,44 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <h2>Outros tipos de arquivo</h2>
 <p>Além de arquivos de excel, e arquivos “planos” (como são chamados aqueles lidos pelo pacote <code>readr</code>), você pode se deparar com uma série de outros tipos de arquivos tabulares.</p>
 <p>Abaixo uma lista de pacotes para outros tipos:</p>
-<p>Pacote | Tipo de arquivo</p>
-<p>——– | —–</p>
-<p>haven | SPSS, Stata, e SAS files</p>
-<p>jsonlite | json</p>
-<p>xml2 | xml</p>
-<p>httr | web API’s</p>
-<p>rvest | páginas web (web scraping)</p>
-<p>DBI | databases</p>
-<p>sparklyr | dados carregados no spark (Big Data)</p>
+<table>
+<thead>
+<tr class="header">
+<th>Pacote</th>
+<th>Tipo de arquivo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>haven</td>
+<td>SPSS, Stata, e SAS files</td>
+</tr>
+<tr class="even">
+<td>jsonlite</td>
+<td>json</td>
+</tr>
+<tr class="odd">
+<td>xml2</td>
+<td>xml</td>
+</tr>
+<tr class="even">
+<td>httr</td>
+<td>web API’s</td>
+</tr>
+<tr class="odd">
+<td>rvest</td>
+<td>páginas web (web scraping)</td>
+</tr>
+<tr class="even">
+<td>DBI</td>
+<td>databases</td>
+</tr>
+<tr class="odd">
+<td>sparklyr</td>
+<td>dados carregados no spark (Big Data)</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="bonus---ctrl-c-e-ctrl-v-no-r" class="section level2">
 <h2>Bônus - Ctrl C e Ctrl V no R?</h2>
