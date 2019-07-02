@@ -4,7 +4,7 @@
 
 
 
-Instrutores: Edgar Cutar Junior e Italo Cegatta
+####Instrutores: Edgar Cutar Junior e Italo Cegatta
 
 
 
@@ -24,7 +24,7 @@ Instrutores: Edgar Cutar Junior e Italo Cegatta
 
 
 
-### Dia 1 - Introdução à linguagem R, Importação e Visualização  
+# Dia 1 - Introdução à linguagem R, Importação e Visualização  
 
 
 
@@ -42,7 +42,7 @@ Instrutores: Edgar Cutar Junior e Italo Cegatta
 
 
 
-### Dia 2 - Manipulação de Dados e Projeto
+# Dia 2 - Manipulação de Dados e Projeto
 
 
 
