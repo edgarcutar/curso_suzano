@@ -642,10 +642,10 @@ resumo_zonaclimatica_estado %&gt;%
 <p>Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
   geom_density()</code></pre>
-<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = &quot;identity&quot;</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
+<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = "identity"</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(alpha = 0.3)</code></pre>
-<p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = &quot;stack&quot;</code> que, como o nome indica, empilha os gráficos.</p>
+<p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = "stack"</code> que, como o nome indica, empilha os gráficos.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(position = &quot;stack&quot;)</code></pre>
 <p>A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.</p>

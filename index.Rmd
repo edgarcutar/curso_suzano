@@ -1,11 +1,11 @@
 ---
+title: "Curso R Suzano"
 ---
+
+## Instrutores: Edgar Cutar Junior e Ítalo Cegatta
+
 <br>
-
-
-
-####Instrutores: Edgar Cutar Junior e Italo Cegatta
-
+<br>
 
 
 ## Requisitos
@@ -19,14 +19,11 @@
 ### No dia do curso
 * [Baixe os slides](https://github.com/edgarcutar/curso_suzano/raw/master/ppt/Introducao.pdf) introdutórios e siga as instruções nos slides.  
 
-
 <br>
 
+## Programa
 
-
-# Dia 1 - Introdução à linguagem R, Importação e Visualização  
-
-
+### Dia 1 - Introdução à linguagem R, Importação e Visualização  
 
 * Linguagem R e RStudio
 
@@ -37,20 +34,8 @@
 * Visualização de Dados
 
 
-
-<br>
-
-
-
-# Dia 2 - Manipulação de Dados e Projeto
-
-
+### Dia 2 - Manipulação de Dados e Projeto
 
 * Manipulação de dados
 
 * Projeto para fixação de conceitos
-
-
-
-<br>
-

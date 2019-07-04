@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Manipulação de dados</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Curso R Suzano</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a>
+    <span class="fa fa-tree fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="ppt/Introducao.pdf">Comece aqui</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dia 01
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_Importacao.html">Importação de Dados</a>
+    </li>
+    <li>
+      <a href="02_Visualizacao.html">Visualização</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Dia 02
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dia02A.html">Manipulação</a>
+    </li>
+    <li>
+      <a href="dia02B.html">Projeto</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown-header">Edgar</li>
+<li>
+  <a href="mailto:edgarj@suzano.com.br">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/edgarcutar">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/edgarcutar">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li class="dropdown-header">Ítalo</li>
+<li>
+  <a href="mailto:icegatta@suzano.com.br">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/italocegatta">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/italocegatta">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Manipulação de dados</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#tidyverse">Tidyverse</a></li>
+<li><a href="#filter">Filter</a></li>
+<li><a href="#arrange">Arrange</a></li>
+<li><a href="#select">Select</a></li>
+<li><a href="#mutate">Mutate</a></li>
+<li><a href="#summarise">Summarise</a></li>
+<li><a href="#operador">Operador %&gt;%</a></li>
+<li><a href="#graficos-rapidos">Gráficos rápidos</a></li>
+</ul>
+</div>
+
+<div id="tidyverse" class="section level2">
+<h2>Tidyverse</h2>
+<p>Neste curso utilizaremos como referência os pacotes vinculados ao <code>tidyverse</code>, grupo de funções que utilizam a mesma filosofia de programação e foram desenvolvidos para atuarem em conjunto. O <a href="https://www.tidyverse.org/">tidyverse</a> é mantido por um time de desenvolvedores do RStudio e liderado pelo seu idealizador <a href="http://hadley.nz/">Hadley Wickham</a>.</p>
+<p>Há diversas funções disponíveis nos pacotes do <code>tidyverse</code> que tem um equivalente direto nos pacotes <code>base</code> do R, mas com uma implementação mais moderna e consistente que facilita a estruturação do código. No decorrer do curso vamos ter vários exemplos desse comparativo.</p>
+<p>A manipulação de dados é, na maioria das vezes, realizado com <code>data.frames</code> e por isso iremos ver as principais funções que lidam com essa estrutura de forma rápida e prática.</p>
+<p>O pacote <code>dplyr</code> é hoje um dos pacotes mais utilizados para esta finalidade. Ele disponibiliza diversas funções que são “equivalentes” às funções básicas do R, mas como melhorias que nos poupam tempo e deixam o código muito mais fácil de interpretar.</p>
+<p>Como exemplo, vamos realizar uma análise exploratória dos dados de um inventário na floresta amazônica.</p>
+<pre class="r"><code>library(tidyverse)
+library(readxl)</code></pre>
+<pre class="r"><code>inv_amazonia &lt;- read_excel(&quot;data/inv_amazonia.xlsx&quot;)
+
+inv_amazonia</code></pre>
+</div>
+<div id="filter" class="section level2">
+<h2>Filter</h2>
+<p>Com a função <code>filter()</code> é possível selecionar linhas específicas, de acordo com o fator que se deseja. Podem ser usados um ou vários fatores de seleção.</p>
+<pre class="r"><code>filter(inv_amazonia, cap &gt; 300)</code></pre>
+<pre class="r"><code>filter(inv_amazonia, cap &gt; 300 &amp; qf &gt; 1)</code></pre>
+<pre class="r"><code>filter(inv_amazonia, cap &gt; 300 | hcom &gt; 15)</code></pre>
+<pre class="r"><code>filter(inv_amazonia, especie == &quot;IPE&quot;)</code></pre>
+<pre class="r"><code>filter(inv_amazonia, especie %in% c(&quot;COPAIBA&quot;, &quot;IPE&quot;))</code></pre>
+</div>
+<div id="arrange" class="section level2">
+<h2>Arrange</h2>
+<p>Para ordenar as colunas, podemos usar a função <code>arrange()</code>. A hierarquia é dada pela sequência dos fatores que são adicionados como argumentos da função.</p>
+<pre class="r"><code>arrange(inv_amazonia, cap)</code></pre>
+<pre class="r"><code>arrange(inv_amazonia, -cap)</code></pre>
+</div>
+<div id="select" class="section level2">
+<h2>Select</h2>
+<p>A função <code>select()</code> auxilia-nos na seleção de variáveis (colunas).</p>
+<pre class="r"><code>select(inv_amazonia, especie, cap)</code></pre>
+<pre class="r"><code>select(inv_amazonia, especie:cap)</code></pre>
+<pre class="r"><code>select(inv_amazonia, -(familia:comercial))</code></pre>
+</div>
+<div id="mutate" class="section level2">
+<h2>Mutate</h2>
+<p>Para criar novas variáveis, podemos usar a função <code>mutate()</code>. Um diferencial dessa função em relação à função base do R, é que podemos utilizar variáveis criadas dentro do próprio comando.</p>
+<pre class="r"><code>mutate(
+  inv_amazonia,
+  dap = cap / pi,
+  secao = pi * dap^2 / 4
+)</code></pre>
+<p>Note que se quisermos utilizar os dados calculados no futuro, temos de salvar em um objeto. No caso, vamos salvar no mesmo objeto <code>inv_amazonia2</code> de forma que ele será atualizado com as novas colunas.</p>
+<pre class="r"><code>inv_amazonia2 &lt;- mutate(
+  inv_amazonia,
+  dap = cap / pi
+)</code></pre>
+</div>
+<div id="summarise" class="section level2">
+<h2>Summarise</h2>
+<p>A função <code>summarise</code> nos permite resumir dados. Também é possível resumir dados em função de vários fatores com o <code>group_by</code>.</p>
+<pre class="r"><code>summarise(inv_amazonia2, dap_medio = mean(dap))</code></pre>
+<pre class="r"><code>summarise(inv_amazonia2, hcom_medio = mean(hcom))</code></pre>
+<pre class="r"><code>summarise(inv_amazonia2, hcom_medio = mean(hcom, na.rm = TRUE))</code></pre>
+<pre class="r"><code>inv_amazonia_by_esp &lt;- group_by(inv_amazonia2, especie)
+
+summarise(inv_amazonia_by_esp, dap_medio = mean(dap))</code></pre>
+<pre class="r"><code>inv_amazonia_by_esp &lt;- group_by(inv_amazonia2, especie)
+
+resumo_esp &lt;- summarise(
+  inv_amazonia_by_esp,
+  n = n(),
+  dap_medio = mean(dap, na.rm = TRUE),
+  hcom_medio = mean(hcom, na.rm = TRUE)
+)
+
+resumo_esp </code></pre>
+<pre class="r"><code>filter(resumo_esp, dap_medio &gt; 50)</code></pre>
+</div>
+<div id="operador" class="section level2">
+<h2>Operador %&gt;%</h2>
+<p>O pacote <code>dplyr</code> foi desenhado para trabalhar em conjunto que o operador em cadeia <code>%&gt;%</code>. O que esse operador faz é aplicar o que está no LHS no primeiro parâmetro da função do RHS. Podemos também direcionar o local onde o conteúdo do LHS será aplicado informando um <code>.</code> como argumento.</p>
+<pre class="r"><code>inv_amazonia2 %&gt;%
+  group_by(especie) %&gt;% 
+  summarise(
+  n = n(),
+  dap_medio = mean(dap, na.rm = TRUE),
+  hcom_medio = mean(hcom, na.rm = TRUE)
+  ) %&gt;% 
+  filter(dap_medio &gt; 50)</code></pre>
+<pre class="r"><code>inv_amazonia %&gt;% 
+  filter(comercial == &quot;Sim&quot;) %&gt;% 
+  select(especie, cap) %&gt;% 
+  arrange(desc(cap)) %&gt;% 
+  slice(1:5)</code></pre>
+</div>
+<div id="graficos-rapidos" class="section level2">
+<h2>Gráficos rápidos</h2>
+<pre class="r"><code>inv_amazonia2 %&gt;% 
+  group_by(especie) %&gt;% 
+  summarise(dap_medio = mean(dap, na.rm = TRUE)) %&gt;% 
+  arrange(desc(dap_medio)) %&gt;% 
+  slice(1:20) %&gt;% 
+  ggplot(aes(especie, dap_medio)) +
+    geom_col() +
+    coord_flip() +
+    theme_bw()</code></pre>
+<pre class="r"><code>inv_amazonia2 %&gt;% 
+  group_by(parcela) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  arrange(desc(n)) %&gt;% 
+  ggplot(aes(factor(parcela), n)) +
+    geom_col() +
+    theme_bw()</code></pre>
+<pre class="r"><code>inv_amazonia2 %&gt;% 
+  ggplot(aes(dap, hcom)) +
+    geom_point() +
+    theme_bw()</code></pre>
+<pre class="r"><code>inv_amazonia2 %&gt;% 
+  ggplot(aes(dap, hcom, color = comercial)) +
+    geom_point() +
+    geom_smooth() +
+    theme_bw()</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

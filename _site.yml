@@ -15,7 +15,7 @@ navbar:
     - text: "Dia 02"
       menu:
       - text: "Manipulação"
-        href: dia02A.html
+        href: 03_manipulacao.html
       - text: "Projeto"
         href: dia02B.html
   right:
