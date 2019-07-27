@@ -4,7 +4,7 @@ output:
  html_document:
     toc: true 
 ---
-Consolidando tudo o que aprendemos nos últimos 2 dias, vamos usar a base de dados "Women in Parliament", divulgada pelo banco mundial, que nos mostra o percentual de mulheres nos parlamentos nacionais.
+Consolidando tudo o que aprendemos nos últimos 2 dias, vamos usar a base de dados "Women in Parliament", divulgada pelo Banco Bundial, que nos mostra o percentual de mulheres nos parlamentos nacionais ao longo dos anos.
 
 A base de dados se chama `woman.csv` e está na pasta `data`, dentro do seu projeto.
 
