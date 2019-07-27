@@ -104,7 +104,7 @@ nimbus <- read_excel("data/nimbus.xlsx", sheet = "nimbus")
     + No parâmetro `col_types`, podemos atualizar todas as colunas, mas só vamos atualizar a coluna `date`, deixando o R advinhar o resto.
     
 ```{r}
-nimbus <- read_excel("data/nimbus.xlsx", col_types = c("date", "guess", "guess", "guess"))
+nimbus <- read_excel("data/nimbus.xlsx", col_types = c("date", "guess", "guess", "numeric"))
 ```
 
 O perigoso aqui é que, caso você erre o tipo da coluna e o R não consiga converter para o tipo de dado que você indicou, todos os dados daquela coluna serão lidos como vazios (ou `NA`, que é o código para não-valor do R). Em tabelas muito grandes essa etapa pode ser um pouco complicada, caso sua base não esteja organizada antes de importar.
@@ -154,6 +154,24 @@ Agora é com você. Case a função com o arquivo correto e verifique se leu cor
 
 ```
 
+## Demonstração
+
+Abaixo, a título de curiosidade, vamos gerar um gráfico com os dados dessa tabela:
+
+```{r}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(maps, mapproj)
+
+world <- map_data(map = "world")
+
+ggplot(data = nimbus) +
+  geom_point(mapping = aes(x = longitude, y = latitude, color = ozone)) +
+  geom_path(data = world, mapping = aes(x = long, y = lat, group = group)) +
+  coord_map("ortho", orientation = c(-90, 0, 0)) +
+  scale_color_viridis_c()
+```
+
+
 ## Outros tipos de arquivo
 
 Além de arquivos de excel, e arquivos "planos" (como são chamados aqueles lidos pelo pacote `readr`), você pode se deparar com uma série de outros tipos de arquivos tabulares.
@@ -168,9 +186,7 @@ xml2     | xml
 httr     | web API's
 rvest    | páginas web (web scraping)
 DBI      | databases
-
 sparklyr | dados carregados no spark (Big Data)
-
 
 ## Bônus - Ctrl C e Ctrl V no R? 
 

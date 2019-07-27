@@ -310,7 +310,7 @@ $(document).ready(function () {
       <a href="03_manipulacao.html">Manipulação</a>
     </li>
     <li>
-      <a href="dia02B.html">Projeto</a>
+      <a href="04_projeto.html">Projeto</a>
     </li>
   </ul>
 </li>
@@ -373,6 +373,7 @@ $(document).ready(function () {
 <li><a href="#a-funcao-read_excel">A função read_excel</a></li>
 <li><a href="#os-parametros-da-funcao-read_excel">Os parâmetros da função read_excel</a></li>
 <li><a href="#o-pacote-readr-e-seus-filhos">O pacote readr e seus filhos</a></li>
+<li><a href="#demonstracao">Demonstração</a></li>
 <li><a href="#outros-tipos-de-arquivo">Outros tipos de arquivo</a></li>
 <li><a href="#bonus---ctrl-c-e-ctrl-v-no-r">Bônus - Ctrl C e Ctrl V no R?</a></li>
 </ul>
@@ -447,7 +448,7 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <li>No parâmetro <code>col_types</code>, podemos atualizar todas as colunas, mas só vamos atualizar a coluna <code>date</code>, deixando o R advinhar o resto.</li>
 </ul></li>
 </ul>
-<pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, col_types = c(&quot;date&quot;, &quot;guess&quot;, &quot;guess&quot;, &quot;guess&quot;))</code></pre>
+<pre class="r"><code>nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, col_types = c(&quot;date&quot;, &quot;guess&quot;, &quot;guess&quot;, &quot;numeric&quot;))</code></pre>
 <p>O perigoso aqui é que, caso você erre o tipo da coluna e o R não consiga converter para o tipo de dado que você indicou, todos os dados daquela coluna serão lidos como vazios (ou <code>NA</code>, que é o código para não-valor do R). Em tabelas muito grandes essa etapa pode ser um pouco complicada, caso sua base não esteja organizada antes de importar.</p>
 <p>Existem diversos outros parâmetros para a função <code>read_excel()</code>, assim como para qualquer outra função. O jeito mais simples de saber todos eles é através da função de ajuda. Podemos acessar o tópico de ajuda para qualquer função utilizando o símbolo <code>?</code> antes do nome da mesma, como em <code>?funcao</code>.</p>
 <p>Vamos tentar:</p>
@@ -506,6 +507,20 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <p>Deixei dois arquivos <code>nimbus</code> na pasta <code>data</code>, cada um em um formato, pra gente treinar.</p>
 <p>Agora é com você. Case a função com o arquivo correto e verifique se leu corretamente ali na aba “Environment”.</p>
 </div>
+<div id="demonstracao" class="section level2">
+<h2>Demonstração</h2>
+<p>Abaixo, a título de curiosidade, vamos gerar um gráfico com os dados dessa tabela:</p>
+<pre class="r"><code>if (!require(&quot;pacman&quot;)) install.packages(&quot;pacman&quot;)
+pacman::p_load(maps, mapproj)
+
+world &lt;- map_data(map = &quot;world&quot;)
+
+ggplot(data = nimbus) +
+  geom_point(mapping = aes(x = longitude, y = latitude, color = ozone)) +
+  geom_path(data = world, mapping = aes(x = long, y = lat, group = group)) +
+  coord_map(&quot;ortho&quot;, orientation = c(-90, 0, 0)) +
+  scale_color_viridis_c()</code></pre>
+</div>
 <div id="outros-tipos-de-arquivo" class="section level2">
 <h2>Outros tipos de arquivo</h2>
 <p>Além de arquivos de excel, e arquivos “planos” (como são chamados aqueles lidos pelo pacote <code>readr</code>), você pode se deparar com uma série de outros tipos de arquivos tabulares.</p>
@@ -542,9 +557,12 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <td>DBI</td>
 <td>databases</td>
 </tr>
+<tr class="odd">
+<td>sparklyr</td>
+<td>dados carregados no spark (Big Data)</td>
+</tr>
 </tbody>
 </table>
-<p>sparklyr | dados carregados no spark (Big Data)</p>
 </div>
 <div id="bonus---ctrl-c-e-ctrl-v-no-r" class="section level2">
 <h2>Bônus - Ctrl C e Ctrl V no R?</h2>

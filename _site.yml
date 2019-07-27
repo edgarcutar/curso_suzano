@@ -17,7 +17,7 @@ navbar:
       - text: "Manipulação"
         href: 03_manipulacao.html
       - text: "Projeto"
-        href: dia02B.html
+        href: 04_projeto.html
   right:
     - text: "Edgar"
     - icon: fa-envelope fa-lg

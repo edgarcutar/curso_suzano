@@ -1,0 +1,76 @@
+---
+title: "Projeto"
+output:
+ html_document:
+    toc: true 
+---
+Consolidando tudo o que aprendemos nos últimos 2 dias, vamos usar a base de dados "Women in Parliament", divulgada pelo banco mundial, que nos mostra o percentual de mulheres nos parlamentos nacionais.
+
+A base de dados se chama `woman.csv` e está na pasta `data`, dentro do seu projeto.
+
+Passos do projeto:
+
+1. Abra o arquivo no Excel. O que te de diferente nele?
+
+2. Descubra como importar o arquivo dessa forma, sem alterar o arquivo. #Dica: acesse a ajuda da função `read_csv` usando o `?read_csv`.
+
+```{r}
+
+```
+
+3. Utilize a função `gather` e deixe sua tabela mais organizada, transformando as colunas de anos em linhas, com cada observação (% de mulheres no parlamento em um determinado ano em um determinado país) em uma linha. Vamos chamar a coluna com anos de `ano` e a coluna com percentuais de `percentual`.
+
+```{r}
+
+```
+
+4. Existe um problema com sua coluna `percentual`! Qual é esse problema? Vamos usar `mutate` e `as.numeric` para resolver esse problema.
+
+```{r}
+
+```
+
+5. Usando as funções que aprendemos pela manhã, responda às perguntas abaixo:
+
+> Em que ano começam os registros dessa base de dados? Neste ano, qual o país com maior percentual de mulheres?"
+
+Dica: sua base de dados contém vários valores `NA` ou `NaN`. Estes dados são o equivalente a uma **célula vazia**. Existe um parâmetro na maioria das funções matemáticas para ignorar esses valores.
+
+```{r}
+
+```
+
+> E hoje? Qual país com maior percentual de mulheres no parlamento?
+
+```{r}
+
+```
+
+> Qual país teve o maior incremento relativo de mulheres no parlamento desde 1997?
+
+$Incremento = \frac{\% 2018}{\% 1997}$
+
+> Faça um gráfico de linha mostrando a evolução do percentual médio de mulheres no mundo desde 1997
+
+```{r}
+
+```
+
+> Faça o mesmo para o Brasil
+
+```{r}
+
+```
+
+> Bônus: Consegue juntar estes dois gráficos em um só, com duas linhas?
+
+```{r}
+
+```
+
+> Bônus +: na pasta `data` existe uma planilha chamada `metadata_women`, com uma aba chamada `Metadata - Countries`. Faça um gráfico de linhas mostrando a evolução conforme anteriormente, mas dessa vez agrupe os países pelo `IncomeGroup` presente nesse metadata.
+
+```{r}
+
+```
+
