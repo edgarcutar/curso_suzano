@@ -12,7 +12,7 @@
 
 
 
-<title></title>
+<title>Projeto</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -361,11 +363,44 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Projeto</h1>
 
 </div>
 
 
-<p>CursoR_Suzano</p>
+<p>Consolidando tudo o que aprendemos nos últimos 2 dias, vamos usar a base de dados “Women in Parliament”, divulgada pelo Banco Bundial, que nos mostra o percentual de mulheres nos parlamentos nacionais ao longo dos anos.</p>
+<p>A base de dados se chama <code>woman.csv</code> e está na pasta <code>data</code>, dentro do seu projeto.</p>
+<p>Passos do projeto:</p>
+<ol style="list-style-type: decimal">
+<li><p>Abra o arquivo no Excel. O que te de diferente nele?</p></li>
+<li><p>Descubra como importar o arquivo dessa forma, sem alterar o arquivo. #Dica: acesse a ajuda da função <code>read_csv</code> usando o <code>?read_csv</code>.</p></li>
+<li><p>Utilize a função <code>gather</code> e deixe sua tabela mais organizada, transformando as colunas de anos em linhas, com cada observação (% de mulheres no parlamento em um determinado ano em um determinado país) em uma linha. Vamos chamar a coluna com anos de <code>ano</code> e a coluna com percentuais de <code>percentual</code>.</p></li>
+<li><p>Existe um problema com sua coluna <code>percentual</code>! Qual é esse problema? Vamos usar <code>mutate</code> e <code>as.numeric</code> para resolver esse problema.</p></li>
+<li><p>Usando as funções que aprendemos pela manhã, responda às perguntas abaixo:</p></li>
+</ol>
+<blockquote>
+<p>Em que ano começam os registros dessa base de dados? Neste ano, qual o país com maior percentual de mulheres?&quot;</p>
+</blockquote>
+<p>Dica: sua base de dados contém vários valores <code>NA</code> ou <code>NaN</code>. Estes dados são o equivalente a uma <strong>célula vazia</strong>. Existe um parâmetro na maioria das funções matemáticas para ignorar esses valores.</p>
+<blockquote>
+<p>E hoje? Qual país com maior percentual de mulheres no parlamento?</p>
+</blockquote>
+<blockquote>
+<p>Qual país teve o maior incremento relativo de mulheres no parlamento desde 1997?</p>
+</blockquote>
+<p><span class="math inline">\(Incremento = \frac{\% 2018}{\% 1997}\)</span></p>
+<blockquote>
+<p>Faça um gráfico de linha mostrando a evolução do percentual médio de mulheres no mundo desde 1997</p>
+</blockquote>
+<blockquote>
+<p>Faça o mesmo para o Brasil</p>
+</blockquote>
+<blockquote>
+<p>Bônus: Consegue juntar estes dois gráficos em um só, com duas linhas?</p>
+</blockquote>
+<blockquote>
+<p>Bônus +: na pasta <code>data</code> existe uma planilha chamada <code>metadata_women</code>, com uma aba chamada <code>Metadata - Countries</code>. Faça um gráfico de linhas mostrando a evolução conforme anteriormente, mas dessa vez agrupe os países pelo <code>IncomeGroup</code> presente nesse metadata.</p>
+</blockquote>
 
 
 

@@ -1,9 +1,7 @@
-# install packages from CRAN ---------------------------------------------------
-cran_pkgs <- c("tidyverse", "remotes")
-install.packages(cran_pkgs, repos = "https://cran.rstudio.com/",
-                 dependencies = TRUE)
+# instalar pacotes from CRAN ---------------------------------------------------
+install.packages("tidyverse")
+install.packages("readxl")
+install.packages("devtools")
 
-
-# install packages from GitHub -------------------------------------------------
-github_pkgs <- c("elbersb/tidylog")
-remotes::install_github(github_pkgs, dependencies = TRUE, upgrade = TRUE)
+# instalar pacotes from GitHub -------------------------------------------------
+devtools::install_github("edgarcutar/suzycolors")
