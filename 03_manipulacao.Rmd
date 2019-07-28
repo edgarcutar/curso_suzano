@@ -219,11 +219,7 @@ Por tidy data, entendemos que:
 *  Observações estão dispostas em linhas.
 *  Os valores atribuídos às variáveis em cada observação formam a tabela.
 
-<br>
-```{r tidydata, echo=FALSE}
-knitr::include_graphics("http://i.imgur.com/0TxarVh.png")
-```
-<br>
+![](https://garrettgman.github.io/images/tidy-1.png)
 
 Para exemplificar o conceito, vamos trabalhar com a base de IDH de municípios do estado de São Paulo.
 
