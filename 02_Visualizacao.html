@@ -7,7 +7,6 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -248,6 +247,18 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
@@ -379,10 +390,10 @@ $(document).ready(function () {
 <li><a href="#grupos">Grupos</a></li>
 <li><a href="#geometrias">Geometrias</a></li>
 <li><a href="#histograma">Histograma</a></li>
+<li><a href="#densidade">Densidade</a></li>
+<li><a href="#barras">Barras</a></li>
 <li><a href="#texto">Texto</a></li>
 <li><a href="#boxplot">Boxplot</a></li>
-<li><a href="#barras">Barras</a></li>
-<li><a href="#densidade">Densidade</a></li>
 <li><a href="#violin-e-dotplot">Violin e dotplot</a></li>
 <li><a href="#escalas">Escalas</a></li>
 <li><a href="#scale_xy_continuous">scale_[xy]_continuous</a></li>
@@ -578,6 +589,43 @@ ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
 <pre class="r"><code>ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = &quot;fill&quot;)</code></pre>
 </div>
+<div id="densidade" class="section level2">
+<h2>Densidade</h2>
+<p>Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do <code>geom_density</code> é que a <strong>integral</strong> do gráfico seja igual a 1.</p>
+<pre class="r"><code>ggplot(inv, aes(ima7ccr)) +
+  geom_density()</code></pre>
+<p>Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.</p>
+<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
+  geom_density()</code></pre>
+<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = "identity"</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
+<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(alpha = 0.3)</code></pre>
+<p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = "stack"</code> que, como o nome indica, empilha os gráficos.</p>
+<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(position = &quot;stack&quot;)</code></pre>
+<p>A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.</p>
+<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(position = &quot;fill&quot;)</code></pre>
+</div>
+<div id="barras" class="section level2">
+<h2>Barras</h2>
+<p>Para demonstrar como os diferentes tipos de agrupamento de barras funcionam, vamos criar um gráfico que possui contagem de diferentes categorias por fator.</p>
+<pre class="r"><code>ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr)) +
+  geom_col()</code></pre>
+<p>Podemos adicionar a dimensão de color para verificar a diferença nos dados. O resultado não faz muito sentido, mas serve de exemplo.</p>
+<pre class="r"><code>resumo_zonaclimatica_estado &lt;- inv %&gt;%
+  group_by(zonaclimatica, estado) %&gt;%
+  summarise(
+    ima7ccr = weighted.mean(ima7ccr, arearotacao, na.rm = TRUE),
+    idinvr = weighted.mean(idinvr, arearotacao, na.rm = TRUE),
+    n_arv = weighted.mean(nfustesr, arearotacao, na.rm = TRUE),
+    p_falha = weighted.mean(pfalhasr, arearotacao, na.rm = TRUE)
+    )
+
+resumo_zonaclimatica_estado %&gt;% 
+  ggplot(aes(zonaclimatica, ima7ccr, fill = estado)) +
+    geom_col(position = &quot;dodge&quot;)</code></pre>
+</div>
 <div id="texto" class="section level2">
 <h2>Texto</h2>
 <p>Adição de texto e rótulos ao gráfico em forma de geometria. Caso queira inserir uma anotação, utiliza-se o <code>annotate()</code>.</p>
@@ -603,43 +651,6 @@ ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
     width = 0.1,
     alpha = 0.5
   )</code></pre>
-</div>
-<div id="barras" class="section level2">
-<h2>Barras</h2>
-<p>Para demonstrar como os diferentes tipos de agrupamento de barras funcionam, vamos criar um gráfico que possui contagem de diferentes categorias por fator.</p>
-<pre class="r"><code>ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr)) +
-  geom_col()</code></pre>
-<p>Podemos adicionar a dimensão de color para verificar a diferença nos dados. O resultado não faz muito sentido, mas serve de exemplo.</p>
-<pre class="r"><code>resumo_zonaclimatica_estado &lt;- inv %&gt;%
-  group_by(zonaclimatica, estado) %&gt;%
-  summarise(
-    ima7ccr = weighted.mean(ima7ccr, arearotacao, na.rm = TRUE),
-    idinvr = weighted.mean(idinvr, arearotacao, na.rm = TRUE),
-    n_arv = weighted.mean(nfustesr, arearotacao, na.rm = TRUE),
-    p_falha = weighted.mean(pfalhasr, arearotacao, na.rm = TRUE)
-    )
-
-resumo_zonaclimatica_estado %&gt;% 
-  ggplot(aes(zonaclimatica, ima7ccr, fill = estado)) +
-    geom_col(position = &quot;dodge&quot;)</code></pre>
-</div>
-<div id="densidade" class="section level2">
-<h2>Densidade</h2>
-<p>Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do <code>geom_density</code> é que a <strong>integral</strong> do gráfico seja igual a 1.</p>
-<pre class="r"><code>ggplot(inv, aes(ima7ccr)) +
-  geom_density()</code></pre>
-<p>Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.</p>
-<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
-  geom_density()</code></pre>
-<p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = &quot;identity&quot;</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
-<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(alpha = 0.3)</code></pre>
-<p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = &quot;stack&quot;</code> que, como o nome indica, empilha os gráficos.</p>
-<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(position = &quot;stack&quot;)</code></pre>
-<p>A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.</p>
-<pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(position = &quot;fill&quot;)</code></pre>
 </div>
 <div id="violin-e-dotplot" class="section level2">
 <h2>Violin e dotplot</h2>
@@ -718,7 +729,7 @@ resumo_zonaclimatica_estado %&gt;%
   geom_point() +
   geom_smooth(method = &quot;lm&quot;) +
   facet_wrap(~zonaclimatica) +
-  scale_color_brewer(palette = &quot;Dark2&quot;)</code></pre>
+  scale_color_manual(values = c(&quot;#2d56b5&quot;, &quot;#10c23f&quot;, &quot;#f5d507&quot;, &quot;#c2503c&quot;, &quot;#851d00&quot;))</code></pre>
 </div>
 
 
@@ -738,23 +749,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

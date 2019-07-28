@@ -283,6 +283,70 @@ ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = "fill")
 ```
 
+
+## Densidade
+
+Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do `geom_density` é que a **integral** do gráfico seja igual a 1.
+
+```{r}
+ggplot(inv, aes(ima7ccr)) +
+  geom_density()
+```
+
+Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.
+
+```{r}
+ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
+  geom_density()
+```
+
+Entretanto o padrão da função `geom_density()` é usar `position = "identity"`, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.
+
+```{r}
+ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(alpha = 0.3)
+```
+
+Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro `position = "stack"` que, como o nome indica, empilha os gráficos.
+
+```{r}
+ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(position = "stack")
+```
+
+A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.
+
+```{r}
+ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
+  geom_density(position = "fill")
+```
+
+## Barras
+
+Para demonstrar como os diferentes tipos de agrupamento de barras funcionam, vamos criar um gráfico que possui contagem de diferentes categorias por fator.
+
+```{r}
+ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr)) +
+  geom_col()
+```
+
+Podemos adicionar a dimensão de color para verificar a diferença nos dados. O resultado não faz muito sentido, mas serve de exemplo.
+
+```{r}
+resumo_zonaclimatica_estado <- inv %>%
+  group_by(zonaclimatica, estado) %>%
+  summarise(
+    ima7ccr = weighted.mean(ima7ccr, arearotacao, na.rm = TRUE),
+    idinvr = weighted.mean(idinvr, arearotacao, na.rm = TRUE),
+    n_arv = weighted.mean(nfustesr, arearotacao, na.rm = TRUE),
+    p_falha = weighted.mean(pfalhasr, arearotacao, na.rm = TRUE)
+    )
+
+resumo_zonaclimatica_estado %>% 
+  ggplot(aes(zonaclimatica, ima7ccr, fill = estado)) +
+    geom_col(position = "dodge")
+```
+
 ## Texto
 
 Adição de texto e rótulos ao gráfico em forma de geometria. Caso queira inserir uma anotação, utiliza-se o `annotate()`. 
@@ -324,68 +388,6 @@ ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   )
 ```
 
-## Barras
-
-Para demonstrar como os diferentes tipos de agrupamento de barras funcionam, vamos criar um gráfico que possui contagem de diferentes categorias por fator.
-
-```{r}
-ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr)) +
-  geom_col()
-```
-
-Podemos adicionar a dimensão de color para verificar a diferença nos dados. O resultado não faz muito sentido, mas serve de exemplo.
-
-```{r}
-resumo_zonaclimatica_estado <- inv %>%
-  group_by(zonaclimatica, estado) %>%
-  summarise(
-    ima7ccr = weighted.mean(ima7ccr, arearotacao, na.rm = TRUE),
-    idinvr = weighted.mean(idinvr, arearotacao, na.rm = TRUE),
-    n_arv = weighted.mean(nfustesr, arearotacao, na.rm = TRUE),
-    p_falha = weighted.mean(pfalhasr, arearotacao, na.rm = TRUE)
-    )
-
-resumo_zonaclimatica_estado %>% 
-  ggplot(aes(zonaclimatica, ima7ccr, fill = estado)) +
-    geom_col(position = "dodge")
-```
-
-## Densidade
-
-Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do `geom_density` é que a **integral** do gráfico seja igual a 1.
-
-```{r}
-ggplot(inv, aes(ima7ccr)) +
-  geom_density()
-```
-
-Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.
-
-```{r}
-ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
-  geom_density()
-```
-
-Entretanto o padrão da função `geom_density()` é usar `position = "identity"`, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.
-
-```{r}
-ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(alpha = 0.3)
-```
-
-Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro `position = "stack"` que, como o nome indica, empilha os gráficos.
-
-```{r}
-ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(position = "stack")
-```
-
-A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.
-
-```{r}
-ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
-  geom_density(position = "fill")
-```
 
 ## Violin e dotplot
 
@@ -517,5 +519,5 @@ ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   geom_smooth(method = "lm") +
   facet_wrap(~zonaclimatica) +
-  scale_color_brewer(palette = "Dark2")
+  scale_color_manual(values = c("#2d56b5", "#10c23f", "#f5d507", "#c2503c", "#851d00"))
 ```

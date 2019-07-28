@@ -7,7 +7,6 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -248,6 +247,18 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
@@ -379,7 +390,7 @@ $(document).ready(function () {
 <li><p>Usando as funções que aprendemos pela manhã, responda às perguntas abaixo:</p></li>
 </ol>
 <blockquote>
-<p>Em que ano começam os registros dessa base de dados? Neste ano, qual o país com maior percentual de mulheres?&quot;</p>
+<p>Em que ano começam os registros dessa base de dados? Neste ano, qual o país com maior percentual de mulheres?"</p>
 </blockquote>
 <p>Dica: sua base de dados contém vários valores <code>NA</code> ou <code>NaN</code>. Estes dados são o equivalente a uma <strong>célula vazia</strong>. Existe um parâmetro na maioria das funções matemáticas para ignorar esses valores.</p>
 <blockquote>
@@ -419,23 +430,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

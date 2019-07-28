@@ -7,7 +7,6 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -248,6 +247,18 @@ $(document).ready(function () {
 }
 </style>
 
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
 <!-- code folding -->
 
 
@@ -377,6 +388,7 @@ $(document).ready(function () {
 <li><a href="#summarise">Summarise</a></li>
 <li><a href="#operador">Operador %&gt;%</a></li>
 <li><a href="#graficos-rapidos">Gráficos rápidos</a></li>
+<li><a href="#reshape-dos-dados-com-gather-e-spread">Reshape dos dados com gather e spread</a></li>
 </ul>
 </div>
 
@@ -495,6 +507,55 @@ resumo_esp </code></pre>
     geom_smooth() +
     theme_bw()</code></pre>
 </div>
+<div id="reshape-dos-dados-com-gather-e-spread" class="section level2">
+<h2>Reshape dos dados com gather e spread</h2>
+<p>Se você pegar uma apostila ou livro de 10 anos atrás (e olhe que o R tem 23 anos) vai perceber que as análises tinham muitos mais passos apoiados em vetores (unidimensional) e listas (multidimensional). Com o tempo e principalmente por conta dos pacotes do tidyverse, a análise foi ficando cada vez mais amarrada aos <code>data.frames</code>, o que facilita a manipulação e deixa o código mais consistente. Hoje, toda manipulação de dados no R se baseia no conceito tidy data (material para leitura <a href="https://vita.had.co.nz/papers/tidy-data.pdf">aqui</a> e <a href="https://garrettgman.github.io/tidying/">aqui</a>) com <code>data.frames</code>.</p>
+<p>Por tidy data, entendemos que:</p>
+<ul>
+<li>Variáveis estão dispostas em colunas.</li>
+<li>Observações estão dispostas em linhas.</li>
+<li>Os valores atribuídos às variáveis em cada observação formam a tabela.</li>
+</ul>
+<p><br></p>
+<p><br></p>
+<p>Para exemplificar o conceito, vamos trabalhar com a base de IDH de municípios do estado de São Paulo.</p>
+<pre class="r"><code>idh &lt;- read_excel(&quot;data/idh_1991_2010.xlsx&quot;)
+
+idh</code></pre>
+<p>Neste dataset, temos uma variável de tempo chamada <code>decada</code> e outras variáveis que indicam o fator de desenvolvimento <code>longevidade</code>, <code>educacao</code>, <code>renda</code> para cada município <code>cod_municipio</code>.</p>
+<p>Se entendermos que cada um desses fatores de desenvolvimento é uma variável independente, está tudo certo perante o conceito do tidydata. Mas se pensarmos bem, esses fatores também podem ser considerados níveis de uma varíavel <code>idh</code>, cuja média dos fatores retorna o IDH que conhecemos. Então, o formato que vamos dar aos nossos dados pode variar dependendo da pergunta que queremos responder.</p>
+<p>Um exemplo prático é tentarmos fazer um gráfico dos fatores de desenvolvimento ao longo do tempo para uma cidade específica. O <code>ggplot2</code> assume que, se você for gerar uma legenda, ela tem que estar referenciada a uma variável. Nesse caso, temos 3 variáveis para gerar uma legenda, e isso não é legal para o <code>ggplot2</code>.</p>
+<pre class="r"><code>idh %&gt;% 
+  filter(cod_municipio == 3501608) %&gt;% # Americana-SP
+  ggplot(aes(x = decada)) +
+    geom_line(aes(y = longevidade, color = &quot;longevidade&quot;)) +
+    geom_line(aes(y = educacao, color = &quot;educacao&quot;)) +
+    geom_line(aes(y = renda, color = &quot;renda&quot;))</code></pre>
+<p>Tivemos que fazer uma gambiarra porque para este gráfico, os dados precisam estar formatados de outra maneira. Vamos dar um talento nele e refazer o gráfico.</p>
+<pre class="r"><code>idh_tidy &lt;- gather(idh, fator, idh, longevidade, educacao, renda)
+
+idh_tidy</code></pre>
+<pre class="r"><code>idh_tidy %&gt;% 
+  filter(cod_municipio == 3501608) %&gt;% 
+  ggplot(aes(x = decada, y = idh, color = fator)) +
+    geom_line()</code></pre>
+<p>De maneira geral, temos que fazer essas manipulações para encaixar os dados no formado que a função foi desenhada para trabalhar. E essa transposição é super fácil com o <code>gather</code> e com o <code>spread</code>. Um é o oposto do outro. No primeiro caso nós ‘tombamos’ as colunas para uma única variável. Para retornar ao formato original, é só usar o <code>spread</code>.</p>
+<pre class="r"><code>idh_tidy %&gt;% 
+  spread(fator, idh)
+
+idh_tidy %&gt;% 
+  spread(decada, idh)</code></pre>
+<pre class="r"><code>idh_tidy %&gt;% 
+  ggplot(aes(x = decada, y = idh)) +
+    geom_line(aes(group = cod_municipio), alpha = 0.1) +
+    facet_wrap(~fator) +
+    theme_bw()</code></pre>
+<pre class="r"><code>idh_tidy %&gt;% 
+  ggplot(aes(fator, idh, fill = fator)) +
+    geom_violin() +
+    facet_wrap(~decada, scales = &quot;free_x&quot;) +
+    theme_bw()</code></pre>
+</div>
 
 
 
@@ -513,23 +574,6 @@ $(document).ready(function () {
 
 
 </script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
-<!-- code folding -->
-
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

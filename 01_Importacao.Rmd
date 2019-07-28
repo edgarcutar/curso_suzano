@@ -138,11 +138,11 @@ Função              | Tipo de arquivo
 
 Para os arquivos mais comuns, aqueles do tipo CSV, existe um truque cultural.
 
-  Apesar de CSV significar **COMMA SEPARATED VALUES**, ou "Valores Separados por Vírgula", quando um sistema operacional em língua portuguesa salva um CSV, os valores não são separados por vírgula, e sim por ponto-e-vírgula.
+Apesar de CSV significar **COMMA SEPARATED VALUES**, ou "Valores Separados por Vírgula", quando um sistema operacional em língua portuguesa salva um CSV, os valores não são separados por vírgula, e sim por ponto-e-vírgula.
   
   > "Mas por quê, meu consagrado?", você deve estar se perguntando
   
-  Porque nós, assim como alguns outros países, utilizamos a vírgula como separador decimal, o que faria uma confusão dos diabos caso utilizássemos a vírgula também como separador de valores. No caso de um arquivo gringo, ou exportado de alguns sistemas, o ponto é o separador decimal, o que deixa a vírgula livre para ser o separador dos valores.
+Porque nós, assim como alguns outros países, utilizamos a vírgula como separador decimal, o que faria uma confusão dos diabos caso utilizássemos a vírgula também como separador de valores. No caso de um arquivo gringo, ou exportado de alguns sistemas, o ponto é o separador decimal, o que deixa a vírgula livre para ser o separador dos valores.
 
 Por isso, existem duas funções separadas para ler arquivos, dependendo de sua origem: a função `read_csv`, para arquivos csv "gringos" (os separados por vírgula mesmo), e `read_csv2`, para arquivos csv "brasileiros" (os separados por ponto-e-vírgula).
 
