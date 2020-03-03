@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -86,7 +86,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -235,6 +234,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -246,18 +246,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -380,12 +368,12 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#conceitos-basicos">Conceitos básicos</a></li>
+<li><a href="#conceitos-básicos">Conceitos básicos</a></li>
 <li><a href="#layers">Layers</a></li>
 <li><a href="#os-dados">Os dados</a></li>
 <li><a href="#as-camadas-de-geometria">As camadas de geometria</a></li>
-<li><a href="#a-camada-de-estatisticas">A camada de estatísticas</a></li>
-<li><a href="#edicoes-de-eixos">Edições de eixos</a></li>
+<li><a href="#a-camada-de-estatísticas">A camada de estatísticas</a></li>
+<li><a href="#edições-de-eixos">Edições de eixos</a></li>
 <li><a href="#aesthetics">Aesthetics</a></li>
 <li><a href="#grupos">Grupos</a></li>
 <li><a href="#geometrias">Geometrias</a></li>
@@ -404,7 +392,7 @@ $(document).ready(function () {
 
 <p>O <code>ggplot2</code>é o pacote mais utilizado para criação de gráficos no R. Ele implementa a Gramática dos Gráficos proposta por Leland Wilkinson em seu livro <a href="https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448">The Grammar of Graphics</a>. A ideia é que há uma gramática racional e computacional para a composição de gráficos estatísticos. Ao controlar a gramática, você pode gerar um grande conjunto de gráficos cuidadosamente construídos a partir de um conjunto relativamente pequeno de operações.</p>
 <p>Existem muitos materiais e cursos sobre como criar gráficos com o ggplot2. Basta um simples google sobre o assunto ou problema que você tem e rapidamente vai aparecer uma pergunta semelhante e várias respostas assunto. Como padrão, a documentação do pacote pode ser consultada, bem como diversos livros sobre o assunto. Recomendamos o site do pacotes <a href="https://ggplot2.tidyverse.org/">ggplot2</a> e o <a href="https://www.amazon.com.br/dp/B01GVCRF6M/">livro do autor</a></p>
-<div id="conceitos-basicos" class="section level2">
+<div id="conceitos-básicos" class="section level2">
 <h2>Conceitos básicos</h2>
 <p>Existem alguns conceitos básicos em torno desde universo de gráficos. Em primeiro lugar, os gráficos são construídos em camadas (layers). Cada componente do gráfico, a partir dos dados fornecidos, está amarrado ao sistema de coordenadas e este por sua vez, está condicionado aos resumos estatísticos, rótulos e escalas. Portanto, gráficos expressos são construídos com poucos comandos, mas com definições padrões. Para criar gráficos personalizados e de maior qualidade é preciso adicionar algumas funções.</p>
 <p>As propriedades gráficas que codificam os dados são dimensões tratadas como <strong>aesthetics</strong> no ggplot2, sendo colocadas dentro da função <code>aes()</code> que, por si, só existe dentro das funções do <code>ggplot</code>. Dentre as dimensões, destacam-se:</p>
@@ -427,7 +415,7 @@ $(document).ready(function () {
 <li>hitogram</li>
 <li>density</li>
 </ul>
-<div id="geometrias-sao-definidas-pelas-funcoes-geom_tipo" class="section level6">
+<div id="geometrias-são-definidas-pelas-funções-geom_tipo" class="section level6">
 <h6>Geometrias são definidas pelas funções <code>geom_[TIPO]</code></h6>
 <p>Você também vai querer adicionar estatísticas que resumem seus dados, e o pacote possibilita algumas delas:</p>
 <ul>
@@ -436,7 +424,7 @@ $(document).ready(function () {
 <li>function</li>
 </ul>
 </div>
-<div id="estatisticas-sao-definidas-pelas-funcoes-stat_tipo" class="section level6">
+<div id="estatísticas-são-definidas-pelas-funções-stat_tipo" class="section level6">
 <h6>Estatísticas são definidas pelas funções <code>stat_[TIPO]</code></h6>
 <p>As dimensões (aesthetics), geometrias e resumos estatísticos constituem as mais importantes camadas de gráfico, mas há uma série de outras características que você vai querer ajustar. As mais comuns são:</p>
 <ul>
@@ -450,7 +438,7 @@ $(document).ready(function () {
 <div id="layers" class="section level2">
 <h2>Layers</h2>
 <p>Iremos criar gráficos em camadas. A estratificação de elementos é talvez o aspecto mais poderoso do ggplot2. Isso significa que gráficos relativamente complexos são construídos com pequenas peças, que você pode adicionar ou remover de forma interativa.</p>
-<div id="para-adicionar-camadas-no-ggplot-vamos-usar-por-incrivel-que-pareca-o-simbolo" class="section level6">
+<div id="para-adicionar-camadas-no-ggplot-vamos-usar-por-incrível-que-pareça-o-símbolo" class="section level6">
 <h6>para adicionar camadas no ggplot, vamos usar, por incrível que pareça, o símbolo <code>+</code></h6>
 </div>
 </div>
@@ -464,6 +452,7 @@ inv &lt;- read_excel(&quot;data/IFC_BA_2018.xlsx&quot;)
 
 p &lt;- ggplot(data = inv, aes(x = idinvr, y = vcccr))
 p</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Veja que os dados e as dimensões dos dados já foram informados, entretanto não nada no gráfico criado por não temos uma geometria definida.</p>
 <p>Cada layer tem uma base de dados. Você pode indicar os <strong>dados (data)</strong> na função principal <code>ggplot()</code> ou nos layers zonaclimaticaecíficos. O mesmo ocorre para a definição das <strong>dimensões (aesthetics)</strong> com a função <code>aes()</code>.</p>
 </div>
@@ -472,29 +461,35 @@ p</code></pre>
 <p>O passo seguinte, depois de definir os dados e as dimensões, é adicionar a geometrias. Iremos discutir geometrias em mais detalhe abaixo, mas por agora, vamos adicionar a mais simples de todas: os pontos.</p>
 <pre class="r"><code>p &lt;- p + geom_point()
 p</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Note que não é necessário ficar criando novos objetos a cada camada. Você pode adicionar as camadas de forma contínua usando o operador <code>+</code>.</p>
 <pre class="r"><code>p + geom_point()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Cada camada é feita por uma função. Algumas não precisarão de parâmetros pois será utilizado o <em>default</em>. No exemplo anterior, fizemos um gráfico e adicionamos a camada de ponto <code>geom_point()</code>, por padrão, serão mostrados pontos pretos e sólidos de tamanho 1.</p>
 <p>Caso você queira alterar o formato do ponto, basta zonaclimaticaecificar no parâmetro indicado.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_point(shape = 2)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Ou, se quiséssemos usar pontos vermelhos e maiores, poderíamos definir:</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_point(color = &quot;red&quot;, size = 3)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Como padrão, o ggplot2 cria um fundo cinza e linhas de grades brancas. Tem uma explicação plausível para isso e na maioria das vezes é bem útil, mas de forma geral não estamos acostumados a esse tema e isso pode incomodar. Mas fique tranquilo, isso é perfeitamente ajustável, vamos ver a seguir como fazê-lo.</p>
 <p>Outro padrão é o <em>nome dos eixos</em>. Ele é corrzonaclimaticaondente à variável indicada, mas também pode ser alterado utilizando a função <code>labs()</code>.</p>
 <p>Finalmente, note que nós não precisamos dizer em <code>geom_point()</code> quais são as dimensões do gráfico. Já fizemos isso na função principal. Os layer herdam essas definições da função principal e por isso não precisamos ficar redefinindo a todo momento.</p>
 </div>
-<div id="a-camada-de-estatisticas" class="section level2">
+<div id="a-camada-de-estatísticas" class="section level2">
 <h2>A camada de estatísticas</h2>
 <p>Adicionar uma linha de tendência é muito simples, veja o exemplo.</p>
 <pre class="r"><code>p + geom_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Nesse gráfico, foi ajustada uma regressão linear com um intervalo de confiança de 95% de y em função de x ( y ~ x ).</p>
 <p>Uma coisa importante a entender é que não é necessário incluir os pontos, podemos apresentar somente a linha de tendência.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-<div id="edicoes-de-eixos" class="section level2">
+<div id="edições-de-eixos" class="section level2">
 <h2>Edições de eixos</h2>
 <p>Podemos alterar o nome dos eixos e ainda adicionar título, subtítulo e fonte ao gráfico.</p>
 <p>Note também a função <code>theme_bw()</code> alterando o <em>tema</em> do gráfico daquele cinza horrível. É possível ver uma lista de temas disponíveis <a href="https://mran.microsoft.com/snapshot/2016-12-03/web/packages/ggthemes/vignettes/ggthemes.html">aqui</a>.</p>
@@ -507,6 +502,7 @@ p</code></pre>
     y = &quot;Volume Comercial com Casca (m³/ha)&quot;
   ) +
   theme_bw()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="aesthetics" class="section level2">
 <h2>Aesthetics</h2>
@@ -524,10 +520,12 @@ p</code></pre>
 <p>Vamos aplicar a dimensão de cor em função da variável <code>zonaclimatica</code>:</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr, color = zonaclimatica)) +
   geom_point() </code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>O ggplot2 gerou automaticamente uma paleta de cores para os dados e criou uma legenda.</p>
 <p>Tal como acontece com tudo no ggplot2, a paleta de cores também é ajustável, o que será discutido em mais detalhes abaixo. O padrão de cores do ggplot2 é bastante inteligente. Cada cor é equidistante em torno de um círculo de cor HSL, e têm igual luminância. A ideia é que nenhuma categoria tenha maior destaque que outra. Um ponto negativo é que ela pode ser um problema para leitores daltônicos.</p>
 <pre class="r"><code>ggplot(inv,  aes(x = idinvr, y = vcccr)) +
   geom_point(color = &quot;red&quot;) </code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Neste momento você pode notar a diferença de indicar a cor fora do <code>aes()</code> não gera legenda e se aplica a todos os pontos. Quando a cor representa uma dimensão dos nossos dados, seja uma escala discreta ou contínua, ela deve ser indicada dentro da função <code>aes()</code> em conjunto com a variável que definirá a dimensão.</p>
 </div>
 <div id="grupos" class="section level2">
@@ -536,13 +534,16 @@ p</code></pre>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr, color = zonaclimatica)) +
   geom_point() +
   geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Como a dimensão cor foi definida na função principal, todos layers herdaram essa informação. Mas e se quisermos um gráfico com pontos coloridos, mas só uma linha de tendência? Simples, vamos dar a dimensão de cor somente para o layer de pontos.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_point(aes(color = zonaclimatica)) +
   geom_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>É importante lembrar que não é só a dimensão de cor que gera sub-agrupamentos no gráfico. Se utilizarmos a forma para diferenciar a variável, essa definição também será herdade nos layers subsequentes.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr, shape = zonaclimatica)) +
   geom_point()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>A criação de gráficos com cores é uma atividade comum em muitas situações. Podemos definir se um gráfico será colorido de duas formas, o preenchimento interno da geometria ou a linha externa. Para o primeiro, utilizamos o parâmetro <code>fill = &lt;variável&gt;</code>e para o segundo <code>color = &lt;variável&gt;</code>. As variáveis podem ser contínuas ou discretas para ambos os casos.</p>
 <pre class="r"><code>resumo_zonaclimatica &lt;- inv %&gt;% 
   group_by(zonaclimatica) %&gt;%
@@ -555,12 +556,15 @@ p</code></pre>
 
 ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
   geom_col()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Se quisermos colorir as barras, o primeiro instinto seria provavelmente para definir <code>color = zonaclimatica</code>. Mas este parâmetro considera apenas o contorno das figuras.</p>
 <pre class="r"><code>ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, color = zonaclimatica)) +
   geom_col()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>O preenchimento é feito utilizando o parâmetro <code>fill = zonaclimatica</code>.</p>
 <pre class="r"><code>ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr, fill = zonaclimatica)) +
   geom_col()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="geometrias" class="section level2">
 <h2>Geometrias</h2>
@@ -579,39 +583,49 @@ ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
 <p>O histograma é um gráfico univariado bastante comum no meio científico. Sua principal função é apresentar a distribuição de frequências dos dados.</p>
 <pre class="r"><code>ggplot(inv, aes(x = vcccr)) +
   geom_histogram()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Também é possível considerar a distribuição dos Clones de maneira independente e adicionar uma transparência às barras.</p>
 <pre class="r"><code>ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = &quot;identity&quot;, alpha = 0.5)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Existem outras formas de enxergar esta distribuição é entendendo a distribuição de cada classe entre os climas. Podemos “empilhar”, as barras, de forma que não haja sobreposição ou então ver qual a fatia de cada classe de IMA7 é ocupada por cada clima. Fazemos isso trocando a variável <code>position</code> para <code>stack</code>, no primeiro caso e <code>fill</code>, no segundo.</p>
 <p>Nesse caso não haverá sobreposição, então podemos tirar a variável <code>alpha</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = &quot;stack&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(inv, aes(x = ima7ccr, fill = zonaclimatica)) +
   geom_histogram(position = &quot;fill&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
 </div>
 <div id="densidade" class="section level2">
 <h2>Densidade</h2>
 <p>Visualizar a distribuição de frequências também é um recurso muito interessante para entender os nossos dados. Podemos fazê-lo através de um histograma ou através de um gráfico de densidade de frequências. Como exemplo iremos visualizar a distribuição do IMA7 das Ups do nosso arquivo. A ideia do <code>geom_density</code> é que a <strong>integral</strong> do gráfico seja igual a 1.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr)) +
   geom_density()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Podemos identificar a distribuição do IMA7 através de cores, uma pra cada clima.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica)) +
   geom_density()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Entretanto o padrão da função <code>geom_density()</code> é usar <code>position = "identity"</code>, ou seja, todas partem do zero. Isso significa que pode have (como de fato acontece) sobreposição das curvas. Uma alternativa rápida é colocar transparência no preenchimento para poder ver através das curvas.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(alpha = 0.3)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Caso o interesse seja ver a contribuição de cada clima para a distribuição total do peso, iremos trabalhar com o parâmetro <code>position = "stack"</code> que, como o nome indica, empilha os gráficos.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(position = &quot;stack&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>A próxima variação de visualização é tratar os valores como partes de um todo, do mesmo modo que fizemos com as barras.</p>
 <pre class="r"><code>ggplot(inv, aes(ima7ccr, fill = zonaclimatica, color = zonaclimatica)) +
   geom_density(position = &quot;fill&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="barras" class="section level2">
 <h2>Barras</h2>
 <p>Para demonstrar como os diferentes tipos de agrupamento de barras funcionam, vamos criar um gráfico que possui contagem de diferentes categorias por fator.</p>
 <pre class="r"><code>ggplot(resumo_zonaclimatica, aes(zonaclimatica, ima7ccr)) +
   geom_col()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Podemos adicionar a dimensão de color para verificar a diferença nos dados. O resultado não faz muito sentido, mas serve de exemplo.</p>
 <pre class="r"><code>resumo_zonaclimatica_estado &lt;- inv %&gt;%
   group_by(zonaclimatica, estado) %&gt;%
@@ -625,6 +639,7 @@ ggplot(resumo_zonaclimatica, aes(x = zonaclimatica, y = ima7ccr)) +
 resumo_zonaclimatica_estado %&gt;% 
   ggplot(aes(zonaclimatica, ima7ccr, fill = estado)) +
     geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="texto" class="section level2">
 <h2>Texto</h2>
@@ -634,16 +649,19 @@ resumo_zonaclimatica_estado %&gt;%
     geom_col() +
     geom_label() +
     annotate(&quot;text&quot;, x = 3, y = 50, label = &quot;Anotação&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="boxplot" class="section level2">
 <h2>Boxplot</h2>
 <p>O boxplot é um gráfico muito útil para demonstrar a distribuição dos dados. Seu objetivo é evidenciar os quartis e outliers.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_boxplot()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Entretanto não vemos os pontos e muitas vezes o gráfico pode nos enganar pois não vemos quantos pontos cada fator tem de verdade. Como alternativa a isto, podemos plotar os pontos em conjunto.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_boxplot() +
   geom_point()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Entretanto, mais uma vez o gráfico pode nos enganar pois a sobreposição dos pontos esconde a verdadeira quantidade. A alternativa para esta situação é utilizar a função <code>jitter()</code>, que adiciona uma variação aleatória aos pontos transformando-os em uma massa de pontos. Para não haver duplicidades nos outliers, podemos retirara-los do boxplot.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_boxplot(outlier.color = NA) +
@@ -651,16 +669,19 @@ resumo_zonaclimatica_estado %&gt;%
     width = 0.1,
     alpha = 0.5
   )</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 </div>
 <div id="violin-e-dotplot" class="section level2">
 <h2>Violin e dotplot</h2>
 <p>Para os que não gostam ou não entendem o boxplot, uma alternativa de gráfico que expressa a mesma ideia é o violin plot. O gráfico consiste em uma curva de densidade simétrica para cada fator.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_violin()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>Podemos ainda adicionar os pontos para ter uma noção de quantidade.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_violin() +
   geom_jitter(alpha = 0.3, width = 0.1)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>Entretanto, o mais indicado é combinar o violin plot com o dot plot e assim evidenciar claramente a distribuição de frequência com uma curva de suavização.</p>
 <pre class="r"><code>ggplot(inv, aes(zonaclimatica, ima7ccr)) +
   geom_violin() +
@@ -669,6 +690,7 @@ resumo_zonaclimatica_estado %&gt;%
     stackdir=&quot;center&quot;,
     dotsize = 0.5
   )</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
 <div id="escalas" class="section level2">
 <h2>Escalas</h2>
@@ -689,16 +711,19 @@ resumo_zonaclimatica_estado %&gt;%
 <p>O ggplot2 determina uma escala e limite padrão para os gráficos de acordo com a escala de variação. Às vezes, queremos maior ou menor detalhe na escala e por isso temos que modificar os parâmetros</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>A alteração dos <code>breaks</code> é feita por um vetor que indica onde será adicionado o marcador do eixo. A função <code>seq</code> tem 3 parâmetros: <code>from</code>, <code>to</code>e <code>by</code>,</p>
 <p>Nesse caso <code>seq(0, 10, 1)</code> significa que queremos uma sequência de números entre 0 e 10, de 1 em 1, e isso vai se traduzir em <code>breaks</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point() +
   scale_x_continuous(breaks = seq(0, 10, 1))</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>Caso seja interessante alterar o rotulo do marcador, temos que criar um novo vetor que contenha os nomes, utilizando o parâmetro <code>labels</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr)) +
   geom_point() +
   scale_x_continuous(breaks = seq(0, 10, 1), 
                      labels = str_c(seq(0, 10, 1), &quot; anos&quot;))</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="escalas-de-cor" class="section level2">
 <h2>Escalas de cor</h2>
@@ -708,19 +733,23 @@ resumo_zonaclimatica_estado %&gt;%
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_fill_hue()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>O pacote <code>RColorBrewer</code> disponibiliza um conjunto de paletas que podem ser incorporadas no ggplot2. basta identificar qual você deseja. Há paletas sequenciais e paletas divergentes. Caso queria ver as paletas, explore pelo comando <code>RColorBrewer::display.brewer.all()</code>.</p>
 <p>No gráfico, basta indicar o nome da paleta no parâmetro <code>palette</code>.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_color_brewer(palette = &quot;Set1&quot;)</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Caso você queria colocar suas proprias cores, terá de fazer isso manualmente. Eu recomendo o site <a href="http://colorbrewer2.org/" class="uri">http://colorbrewer2.org/</a>. A partir do código hexadecimal, podemos colocar as cores que queremos com a função <code>scale_[color|fill]_manual()</code>. Os <a href="https://www.centraldamarcasuzano.com.br/pt/materiais-do-dia-a-dia#materiais-de-papelaria">templates de PowerPoint da Suzano</a> contém os hexadecimais das cores das paletas oficiais em um slide no final do modelo.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_color_manual(values = c(&quot;red&quot;, &quot;darkgreen&quot;, &quot;gold&quot;,  &quot;#fc9272&quot;, &quot;#4a1486&quot;))</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Se for preciso economizar na impressão e colocar o gráfico em escala de cinza, sem problema, temos uma função pronta para isto.</p>
 <pre class="r"><code>ggplot(inv, aes(idinvr, vcccr, color = zonaclimatica)) +
   geom_point() +
   scale_color_grey()</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 </div>
 <div id="facets" class="section level2">
 <h2>Facets</h2>
@@ -730,6 +759,7 @@ resumo_zonaclimatica_estado %&gt;%
   geom_smooth(method = &quot;lm&quot;) +
   facet_wrap(~zonaclimatica) +
   scale_color_manual(values = c(&quot;#2d56b5&quot;, &quot;#10c23f&quot;, &quot;#f5d507&quot;, &quot;#c2503c&quot;, &quot;#851d00&quot;))</code></pre>
+<p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 
 
@@ -749,6 +779,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -86,7 +86,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -235,6 +234,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -246,18 +246,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -381,12 +369,12 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#o-pacote-readxl">O pacote readxl</a></li>
-<li><a href="#a-funcao-read_excel">A função read_excel</a></li>
-<li><a href="#os-parametros-da-funcao-read_excel">Os parâmetros da função read_excel</a></li>
+<li><a href="#a-função-read_excel">A função read_excel</a></li>
+<li><a href="#os-parâmetros-da-função-read_excel">Os parâmetros da função read_excel</a></li>
 <li><a href="#o-pacote-readr-e-seus-filhos">O pacote readr e seus filhos</a></li>
-<li><a href="#demonstracao">Demonstração</a></li>
+<li><a href="#demonstração">Demonstração</a></li>
 <li><a href="#outros-tipos-de-arquivo">Outros tipos de arquivo</a></li>
-<li><a href="#bonus---ctrl-c-e-ctrl-v-no-r">Bônus - Ctrl C e Ctrl V no R?</a></li>
+<li><a href="#bônus---ctrl-c-e-ctrl-v-no-r">Bônus - Ctrl C e Ctrl V no R?</a></li>
 </ul>
 </div>
 
@@ -411,7 +399,7 @@ $(document).ready(function () {
 <p>A planilha <code>nimbus</code> é uma tabela que vamos usar como exemplo, contendo medições de ozônio no hemisfério sul, coletadas pelo satélite NIMBUS-7 da NASA em Outubro de 1985. É um set de dados histórico, porque mostrou evidência do buraco na camada de ozônio logo depois que o buraco foi reportado pela primeira vez.</p>
 </blockquote>
 </div>
-<div id="a-funcao-read_excel" class="section level2">
+<div id="a-função-read_excel" class="section level2">
 <h2>A função read_excel</h2>
 <p>A função utilizada para ler arquivos dos dois tipo é a função <code>read_excel()</code>.</p>
 <p>Vamos testar:</p>
@@ -431,7 +419,7 @@ $(document).ready(function () {
 </ul></li>
 </ol>
 </div>
-<div id="os-parametros-da-funcao-read_excel" class="section level2">
+<div id="os-parâmetros-da-função-read_excel" class="section level2">
 <h2>Os parâmetros da função read_excel</h2>
 <p>Para contornar esses padrões, é necessário fazer isso, explicitamente, ao chamar a função. Vamos a alguns exemplos:</p>
 <ul>
@@ -518,7 +506,7 @@ nimbus &lt;- read_excel(&quot;data/nimbus.xlsx&quot;, sheet = &quot;nimbus&quot;
 <p>Deixei dois arquivos <code>nimbus</code> na pasta <code>data</code>, cada um em um formato, pra gente treinar.</p>
 <p>Agora é com você. Case a função com o arquivo correto e verifique se leu corretamente ali na aba “Environment”.</p>
 </div>
-<div id="demonstracao" class="section level2">
+<div id="demonstração" class="section level2">
 <h2>Demonstração</h2>
 <p>Abaixo, a título de curiosidade, vamos gerar um gráfico com os dados dessa tabela:</p>
 <pre class="r"><code>if (!require(&quot;pacman&quot;)) install.packages(&quot;pacman&quot;)
@@ -575,7 +563,7 @@ ggplot(data = nimbus) +
 </tbody>
 </table>
 </div>
-<div id="bonus---ctrl-c-e-ctrl-v-no-r" class="section level2">
+<div id="bônus---ctrl-c-e-ctrl-v-no-r" class="section level2">
 <h2>Bônus - Ctrl C e Ctrl V no R?</h2>
 <p>Como bônus, vamos ensinar vocês a colar <em>pequenas</em> tabelas direto no R.</p>
 <p>Para isso, vamos precisar instalar o pacote <code>datapasta</code>.</p>
@@ -606,6 +594,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
