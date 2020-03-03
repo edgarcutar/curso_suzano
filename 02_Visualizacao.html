@@ -454,7 +454,7 @@ p &lt;- ggplot(data = inv, aes(x = idinvr, y = vcccr))
 p</code></pre>
 <p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Veja que os dados e as dimensões dos dados já foram informados, entretanto não nada no gráfico criado por não temos uma geometria definida.</p>
-<p>Cada layer tem uma base de dados. Você pode indicar os <strong>dados (data)</strong> na função principal <code>ggplot()</code> ou nos layers zonaclimaticaecíficos. O mesmo ocorre para a definição das <strong>dimensões (aesthetics)</strong> com a função <code>aes()</code>.</p>
+<p>Cada layer tem uma base de dados. Você pode indicar os <strong>dados (data)</strong> na função principal <code>ggplot()</code> ou nos layers específicos. O mesmo ocorre para a definição das <strong>dimensões (aesthetics)</strong> com a função <code>aes()</code>.</p>
 </div>
 <div id="as-camadas-de-geometria" class="section level2">
 <h2>As camadas de geometria</h2>
@@ -466,7 +466,7 @@ p</code></pre>
 <pre class="r"><code>p + geom_point()</code></pre>
 <p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Cada camada é feita por uma função. Algumas não precisarão de parâmetros pois será utilizado o <em>default</em>. No exemplo anterior, fizemos um gráfico e adicionamos a camada de ponto <code>geom_point()</code>, por padrão, serão mostrados pontos pretos e sólidos de tamanho 1.</p>
-<p>Caso você queira alterar o formato do ponto, basta zonaclimaticaecificar no parâmetro indicado.</p>
+<p>Caso você queira alterar o formato do ponto, basta especificar no parâmetro indicado.</p>
 <pre class="r"><code>ggplot(inv, aes(x = idinvr, y = vcccr)) +
   geom_point(shape = 2)</code></pre>
 <p><img src="02_Visualizacao_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -513,8 +513,8 @@ p</code></pre>
 <li><strong>color</strong>: A cor das linhas, pontos, e as fronteiras externas das geometrias (polígonos, barras, etc.).</li>
 <li><strong>fill</strong> : A cor de preenchimento das geometrias.</li>
 <li><strong>size</strong>: O tamanho dos pontos.</li>
-<li><strong>shape</strong>: zonaclimaticaecífico para pontos, define a forma dele.</li>
-<li><strong>linetype</strong>: zonaclimaticaecífico para linhas, define o tipo de linha, caminho, ou borda de uma geometria.</li>
+<li><strong>shape</strong>: específico para pontos, define a forma dele.</li>
+<li><strong>linetype</strong>: específico para linhas, define o tipo de linha, caminho, ou borda de uma geometria.</li>
 <li><strong>alpha</strong>: Isto define a opacidade de qualquer propriedade geométrica. É mais utilizada quando temos sobreposição de pontos ou linhas e queremos enxergar o que está por de trás.</li>
 </ul>
 <p>Vamos aplicar a dimensão de cor em função da variável <code>zonaclimatica</code>:</p>
@@ -694,7 +694,7 @@ resumo_zonaclimatica_estado %&gt;%
 </div>
 <div id="escalas" class="section level2">
 <h2>Escalas</h2>
-<p>Todos os tipos de escala (eixos x e y, cor, preenchimento e tamanho) tem funções zonaclimaticaecíficas de controle e podem ser totalmente customizadas.</p>
+<p>Todos os tipos de escala (eixos x e y, cor, preenchimento e tamanho) tem funções específicas de controle e podem ser totalmente customizadas.</p>
 <p>Os eixos, por exemplo, são modificados pelas funções com o prefixo <code>scale_[x|y]_**()</code>. Abaixo os tipos de <code>scale_x_**</code>, que se repetem para o eixo y</p>
 <pre class="r"><code>apropos(&quot;^scale_x_&quot;)</code></pre>
 <p>Os eixos <code>scale_x_continuous</code>, <code>scale_x_discrete</code>, <code>scale_x_datetime</code> e <code>scale_x_date</code> são os tipos básicos de eixos x e y que você pode modificar no ggplot2. Já <code>scale_x_log10</code>, <code>scale_x_sqrt</code> e <code>scale_x_reverse</code> são transformações básicas para uma escala contínua. Também veremos como criar nossa nossa sequência para composição de eixos.</p>

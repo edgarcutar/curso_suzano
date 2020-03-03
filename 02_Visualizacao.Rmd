@@ -78,7 +78,7 @@ p
 
 Veja que os dados e as dimensões dos dados já foram informados, entretanto não nada no gráfico criado por não temos uma geometria definida.
 
-Cada layer tem uma base de dados. Você pode indicar os **dados (data)** na função principal `ggplot()` ou nos layers zonaclimaticaecíficos. O mesmo ocorre para a definição das **dimensões (aesthetics)** com a função `aes()`.
+Cada layer tem uma base de dados. Você pode indicar os **dados (data)** na função principal `ggplot()` ou nos layers específicos. O mesmo ocorre para a definição das **dimensões (aesthetics)** com a função `aes()`.
 
 ## As camadas de geometria
 
@@ -97,7 +97,7 @@ p + geom_point()
 
 Cada camada é feita por uma função. Algumas não precisarão de parâmetros pois será utilizado o *default*. No exemplo anterior, fizemos um gráfico e adicionamos a camada de ponto `geom_point()`, por padrão, serão mostrados pontos pretos e sólidos de tamanho 1.
 
-Caso você queira alterar o formato do ponto, basta zonaclimaticaecificar no parâmetro indicado.
+Caso você queira alterar o formato do ponto, basta especificar no parâmetro indicado.
 
 ```{r}
 ggplot(inv, aes(x = idinvr, y = vcccr)) +
@@ -162,8 +162,8 @@ No ggplot2, *aesthetics* são os elementos gráficos que representam as dimensõ
 * **color**: A cor das linhas, pontos, e as fronteiras externas das geometrias (polígonos, barras, etc.).
 * **fill** : A cor de preenchimento das geometrias.
 * **size**: O tamanho dos pontos.
-* **shape**: zonaclimaticaecífico para pontos, define a forma dele.
-* **linetype**: zonaclimaticaecífico para linhas, define o tipo de linha, caminho, ou borda de uma geometria.
+* **shape**: específico para pontos, define a forma dele.
+* **linetype**: específico para linhas, define o tipo de linha, caminho, ou borda de uma geometria.
 * **alpha**: Isto define a opacidade de qualquer propriedade geométrica. É mais utilizada quando temos sobreposição de pontos ou linhas e queremos enxergar o que está por de trás.
 
 Vamos aplicar a dimensão de cor em função da variável `zonaclimatica`:
@@ -420,7 +420,7 @@ ggplot(inv, aes(zonaclimatica, ima7ccr)) +
 
 ## Escalas
 
-Todos os tipos de escala (eixos x e y, cor, preenchimento e tamanho) tem funções zonaclimaticaecíficas de controle e podem ser totalmente customizadas.
+Todos os tipos de escala (eixos x e y, cor, preenchimento e tamanho) tem funções específicas de controle e podem ser totalmente customizadas.
 
 Os eixos, por exemplo, são modificados pelas funções com o prefixo `scale_[x|y]_**()`. Abaixo os tipos de `scale_x_**`, que se repetem para o eixo y
 
